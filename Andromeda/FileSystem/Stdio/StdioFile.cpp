@@ -8,17 +8,17 @@ namespace Andromeda
 	{
 		StdioFile::StdioFile() : BaseFile()
 		{
-			_filBuf = 0;
+			_filBuf = nullptr;
 		}
 
 		StdioFile::StdioFile(std::string fileName, std::string loadFileName) : BaseFile(fileName, loadFileName)
 		{
-			_filBuf = 0;
+			_filBuf = nullptr;
 		}
 
 		StdioFile::~StdioFile()
 		{
-			Close();
+			StdioFile::Close();
 		}
 
 		bool StdioFile::Open(FileMode fileMode, FileType fileType)

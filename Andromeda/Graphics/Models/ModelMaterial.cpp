@@ -1,6 +1,5 @@
-
-
 #include "Andromeda/Graphics/Models/ModelMaterial.h"
+#include "Andromeda/Graphics/TextureManager.h"
 
 namespace Andromeda
 {
@@ -17,20 +16,25 @@ namespace Andromeda
 			_specularTexture = "";
 			_bumpTexture = "";
 
-			Image = 0;
+			Image = nullptr;
+		}
+
+		ModelMaterial::~ModelMaterial()
+		{
+
 		}
 
 		void ModelMaterial::SetColor(MaterialColorType type, glm::vec3 color)
 		{
 			switch (type)
 			{
-			case Andromeda::Graphics::MaterialColorAmbient:
+			case MaterialColorAmbient:
 				_ambientColor = color;
 				break;
-			case Andromeda::Graphics::MaterialColorDiffuse:
+			case MaterialColorDiffuse:
 				_diffuseColor = color;
 				break;
-			case Andromeda::Graphics::MaterialColorSpecular:
+			case MaterialColorSpecular:
 				_specularColor = color;
 				break;
 			}
@@ -40,13 +44,13 @@ namespace Andromeda
 		{
 			switch (type)
 			{
-			case Andromeda::Graphics::MaterialTextureDiffuse:
+			case MaterialTextureDiffuse:
 				_diffuseTexture = fileName;
 				break;
-			case Andromeda::Graphics::MaterialTextureSpecular:
+			case MaterialTextureSpecular:
 				_specularTexture = fileName;
 				break;
-			case Andromeda::Graphics::MaterialTextureBump:
+			case MaterialTextureBump:
 				_bumpTexture = fileName;
 				break;
 			}
@@ -56,13 +60,13 @@ namespace Andromeda
 		{
 			switch (type)
 			{
-			case Andromeda::Graphics::MaterialColorAmbient:
+			case MaterialColorAmbient:
 				return _ambientColor;
 				break;
-			case Andromeda::Graphics::MaterialColorDiffuse:
+			case MaterialColorDiffuse:
 				return _diffuseColor;
 				break;
-			case Andromeda::Graphics::MaterialColorSpecular:
+			case MaterialColorSpecular:
 				return _specularColor;
 				break;
 			}
@@ -74,13 +78,13 @@ namespace Andromeda
 		{
 			switch (type)
 			{
-			case Andromeda::Graphics::MaterialTextureDiffuse:
+			case MaterialTextureDiffuse:
 				return _diffuseTexture;
 				break;
-			case Andromeda::Graphics::MaterialTextureSpecular:
+			case MaterialTextureSpecular:
 				return _specularTexture;
 				break;
-			case Andromeda::Graphics::MaterialTextureBump:
+			case MaterialTextureBump:
 				return _bumpTexture;
 				break;
 			}

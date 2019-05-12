@@ -38,7 +38,7 @@ namespace Andromeda
 
 			virtual ~BaseFile();
 
-			bool IsLoaded() { return _loaded; }
+			bool IsLoaded();
 
 			virtual bool Open(FileMode fileMode, FileType fileType) = 0;
 			virtual void Close() = 0;

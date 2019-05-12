@@ -95,7 +95,8 @@ namespace Andromeda
 
 			exist = file->Exist();
 
-			file->Close();
+			//delete will also close file
+			delete file;
 
 			return exist;
 		}

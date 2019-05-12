@@ -3,6 +3,7 @@
 #include <Andromeda/Graphics/ShaderManager.h>
 #include <Andromeda/Graphics/RenderManager.h>
 #include <Andromeda/Utils/Logger.h>
+#include "Andromeda/FileSystem/FileManager.h"
 
 namespace Andromeda
 {
@@ -31,14 +32,27 @@ namespace Andromeda
 			{
 				Utils::Logger::Instance()->Log("ShaderManager::LoadFromFile: %s \n", name.c_str());
 
+				//here change name based on platform
+				vertexFile = vertexFile + RenderManager::Instance()->GetVertexShaderName();
+				fragmentFile = fragmentFile + RenderManager::Instance()->GetFragmnetShaderName();
+
+				if (!FileSystem::FileManager::Instance()->FileExists(vertexFile))
+				{
+					Utils::Logger::Instance()->Log("ShaderManager::LoadFromFile::Can't load file: %s \n", vertexFile.c_str());
+					return nullptr;
+				}
+
+				if (!FileSystem::FileManager::Instance()->FileExists(fragmentFile))
+				{
+					Utils::Logger::Instance()->Log("ShaderManager::LoadFromFile::Can't load file: %s \n", fragmentFile.c_str());
+					return nullptr;
+				}
+
+
 				Shader* shader = RenderManager::Instance()->CreateShader();
 
 				//set name
 				shader->SetName(name);
-
-				//here change name based on platform
-				vertexFile = vertexFile + RenderManager::Instance()->GetVertexShaderName();
-				fragmentFile = fragmentFile + RenderManager::Instance()->GetFragmnetShaderName();
 
 				//load shader
 				shader->LoadFromFile(vertexFile, fragmentFile, vertexType);
@@ -52,11 +66,23 @@ namespace Andromeda
 			return _shaders[name];
 		}
 
-		Shader* ShaderManager::LoadFromMemory(std::string name, std::string vertexShader, std::string fragmentShader, VertexType vertexType)
+		Shader* ShaderManager::LoadFromMemory(std::string name, const std::string& vertexShader, const std::string& fragmentShader, VertexType vertexType)
 		{
 			if (_shaders.find(name) == _shaders.end())
 			{
 				Utils::Logger::Instance()->Log("ShaderManager::LoadFromMemory: %s \n", name.c_str());
+
+				if (vertexShader.empty())
+				{
+					Utils::Logger::Instance()->Log("ShaderManager::LoadFromMemory::Vertex shader is empty \n");
+					return nullptr;
+				}
+
+				if (fragmentShader.empty())
+				{
+					Utils::Logger::Instance()->Log("ShaderManager::LoadFromMemory::Fragment shader is empty \n");
+					return nullptr;
+				}
 
 				Shader* shader = RenderManager::Instance()->CreateShader();
 

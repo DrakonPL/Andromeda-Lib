@@ -20,7 +20,7 @@ namespace Andromeda
 			_textureHeight = 0;
 			_textureWidth = 0;
 			_id = 0;
-			_pixels = 0;
+			_pixels = nullptr;
 			_mipLevel = 0;
 
 			_filterType = TextureFilerType::LinearFilter;
@@ -39,7 +39,7 @@ namespace Andromeda
 		{
 			RenderManager::Instance()->DestroyTexture(this);
 
-			if (_pixels != 0)
+			if (_pixels != nullptr)
 			{
 				System::MemoryManager::Instance()->FreeTexture(this);
 			}
@@ -191,6 +191,11 @@ namespace Andromeda
 		int Texture::GetMipLevel()
 		{
 			return _mipLevel;
+		}
+
+		std::string  Texture::GetFileName()
+		{
+			return _fileName;
 		}
 
 		bool Texture::Resized()

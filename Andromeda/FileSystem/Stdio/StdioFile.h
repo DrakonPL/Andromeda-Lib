@@ -24,16 +24,16 @@ namespace Andromeda
 
 			~StdioFile();
 
-			bool Open(FileMode fileMode, FileType fileType);
-			void Close();
+			bool Open(FileMode fileMode, FileType fileType) override;
+			void Close() override;
 
-			bool Exist();
+			bool Exist() override;
 			
-			void Read(void* data, unsigned size, int count);
-			void Write(void *data, unsigned int size, int count);
+			void Read(void* data, unsigned size, int count) override;
+			void Write(void *data, unsigned int size, int count) override;
 
-			unsigned char* GetData(int& dataSize);
-			char* GetTextData(int &dataSize);
+			unsigned char* GetData(int& dataSize) override;
+			char* GetTextData(int &dataSize) override;
 
 			friend class FileManager;
 		};

@@ -27,8 +27,8 @@ namespace Andromeda
 			ShaderGlSl();
 			~ShaderGlSl();
 
-			void LoadFromFile(std::string vertexFile, std::string fragmentFile, VertexType vertexType);
-			void LoadFromMemory(std::string vertexShader, std::string fragmentShader, VertexType vertexType);
+			bool LoadFromFile(std::string vertexFile, std::string fragmentFile, VertexType vertexType);
+			bool LoadFromMemory(std::string vertexShader, std::string fragmentShader, VertexType vertexType);
 
 			void Bind();
 

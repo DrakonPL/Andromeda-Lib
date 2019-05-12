@@ -23,7 +23,7 @@ namespace Andromeda
 			static ShaderManager* Instance();
 
 			Shader* LoadFromFile(std::string name, std::string vertexFile, std::string fragmentFile, VertexType vertexType);
-			Shader* LoadFromMemory(std::string name, std::string vertexShader, std::string fragmentShader, VertexType vertexType);
+			Shader* LoadFromMemory(std::string name, const std::string& vertexShader, const std::string& fragmentShader, VertexType vertexType);
 
 			Shader* Get(std::string name);
 

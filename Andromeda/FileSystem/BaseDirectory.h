@@ -20,6 +20,7 @@ namespace Andromeda
 			BaseDirectory(std::string dirName);
 
 		public:
+			virtual ~BaseDirectory() = default;
 
 			virtual bool Open() = 0;
 			virtual void Close() = 0;

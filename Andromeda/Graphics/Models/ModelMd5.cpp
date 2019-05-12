@@ -89,15 +89,10 @@ namespace Andromeda
 
 			std::string fileLocation = FileSystem::FileManager::Instance()->GetMainDirPath() + filename;
 
-			FileSystem::BaseFile* myFile = FileSystem::FileManager::Instance()->GetFile(filename);
-
-			if (myFile->Exist())
-			{
-				Utils::Logger::Instance()->Log("[ModelMd5::LoadModel]File: %s exists\n", fileLocation.c_str());
-			}
-			else
+			if (!FileSystem::FileManager::Instance()->FileExists(filename))
 			{
 				Utils::Logger::Instance()->Log("[ModelMd5::LoadModel]File: %s not exists\n", fileLocation.c_str());
+				return false;
 			}
 
 			Utils::Logger::Instance()->Log("[ModelMd5::LoadModel]File: %s\n",fileLocation.c_str());

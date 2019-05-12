@@ -27,6 +27,7 @@ namespace Andromeda
 		public:
 
 			ModelMaterial();
+			~ModelMaterial();
 
 			void SetColor(MaterialColorType type, glm::vec3 color);
 			void SetTextureName(MaterialTextureType type, std::string fileName);

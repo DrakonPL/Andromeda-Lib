@@ -22,14 +22,28 @@ namespace Andromeda
 
 		ModelObj::~ModelObj()
 		{
+			//textures to delete
+			std::vector<std::string> textureNames;
+			for (size_t i = 0; i < _materials.size(); i++)
+			{
+				if (_materials[i]->Image != nullptr)
+				{
+					if (std::find(textureNames.begin(), textureNames.end(), _materials[i]->Image->GetFileName()) == textureNames.end())
+					{
+						textureNames.push_back(_materials[i]->Image->GetFileName());
+					}
+				}
+			}
+
+			for (size_t i = 0; i < textureNames.size(); i++)
+			{
+				TextureManager::Instance()->Remove(textureNames[i]);
+			}
+
+
 			//delete all materials
 			for (size_t i = 0; i < _materials.size(); i++)
 			{
-				if (_materials[i]->Image != 0)
-				{
-  					TextureManager::Instance()->Remove(_materials[i]->Image);
-				}
-
 				delete _materials[i];
 			}
 

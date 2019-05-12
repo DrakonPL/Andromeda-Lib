@@ -8,29 +8,24 @@ namespace Andromeda
 	{
 		StdioDirectory::StdioDirectory() : BaseDirectory()
 		{
-			_directory = NULL;
+			_directory = nullptr;
 		}
 
 		StdioDirectory::StdioDirectory(std::string dirName) : BaseDirectory(dirName)
 		{
-			_directory = NULL;
+			_directory = nullptr;
 		}
 
 		bool StdioDirectory::Open()
 		{
 			_directory = opendir(_dirName.c_str());
 
-			if (_directory != NULL)
-			{
-				return true;
-			}
-
-			return false;
+			return _directory != nullptr;
 		}
 
 		void StdioDirectory::Close()
 		{
-			if (_directory != NULL)
+			if (_directory != nullptr)
 			{
 				closedir(_directory);
 			}
@@ -40,11 +35,11 @@ namespace Andromeda
 		{
 			std::vector<std::string> files;
 
-			if (_directory != NULL)
+			if (_directory != nullptr)
 			{
 				struct dirent *ent;
 
-				while ((ent = readdir(_directory)) != NULL)
+				while ((ent = readdir(_directory)) != nullptr)
 				{
 					if (ent->d_type == DT_REG)
 					{

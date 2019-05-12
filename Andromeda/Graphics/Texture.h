@@ -53,6 +53,7 @@ namespace Andromeda
 
 			~Texture();
 
+
 			//gxm
 			unsigned int _gxmId[4];
 
@@ -62,6 +63,8 @@ namespace Andromeda
 			//load image from memory
 			bool LoadFromMemory(std::string newName, unsigned char *data, std::size_t size, TextureColorType textureColor, TextureFilerType filterType, TextureWrapType textureWrap, int mipLevel);
 
+
+			std::string GetFileName();
 			bool Resized();
 
 			int GetWidth();

@@ -23,11 +23,11 @@ namespace Andromeda
 
 		public:
 
-			bool Open();
-			void Close();
+			bool Open() override;
+			void Close() override;
 
-			std::vector<std::string> GetFiles();
-			std::vector<std::string> GetFiles(std::string extension);
+			std::vector<std::string> GetFiles() override;
+			std::vector<std::string> GetFiles(std::string extension) override;
 
 			friend class FileManager;
 		};

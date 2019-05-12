@@ -26,5 +26,10 @@ namespace Andromeda
 		{
 
 		}
+
+		bool BaseFile::IsLoaded()
+		{
+			return _loaded;
+		}
 	}
 }

@@ -160,10 +160,11 @@ namespace Andromeda
 
 		void TextureManager::Remove(Texture* image)
 		{
-			if (image == 0)
+			if (image == nullptr)
 			{
 				return;
 			}
+
 
 			std::map<std::string, Texture*>::iterator it = _images.find(image->_fileName);
 
@@ -174,8 +175,10 @@ namespace Andromeda
 
 			Utils::Logger::Instance()->Log("TextureManager::Remove: %s \n", it->first.c_str());
 
-			delete image;
 			_images.erase(it);
+
+			delete image;
+			image = nullptr;
 		}
 
 		void TextureManager::RemoveAll()

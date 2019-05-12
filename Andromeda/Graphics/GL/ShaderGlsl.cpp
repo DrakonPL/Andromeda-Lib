@@ -21,10 +21,13 @@ namespace Andromeda
 
 		ShaderGlSl::~ShaderGlSl()
 		{
-			glDeleteProgram(_shaderProgram);
+			if (_shaderProgram != -1)
+			{
+				glDeleteProgram(_shaderProgram);
+			}
 		}
 		
-		void ShaderGlSl::LoadFromFile(std::string vertexFile, std::string fragmentFile, VertexType vertexType)
+		bool ShaderGlSl::LoadFromFile(std::string vertexFile, std::string fragmentFile, VertexType vertexType)
 		{
 			_vertexType = vertexType;
 
@@ -36,9 +39,11 @@ namespace Andromeda
 
 			//link program
 			_shaderProgram = LinkShader(_vertexShader, _fragmentShader);
+
+			return true;
 		}
 
-		void ShaderGlSl::LoadFromMemory(std::string vertexShader, std::string fragmentShader, VertexType vertexType)
+		bool ShaderGlSl::LoadFromMemory(std::string vertexShader, std::string fragmentShader, VertexType vertexType)
 		{
 			_vertexType = vertexType;
 
@@ -50,6 +55,8 @@ namespace Andromeda
 
 			//ling program
 			_shaderProgram = LinkShader(_vertexShader, _fragmentShader);
+
+			return true;
 		}
 
 		void ShaderGlSl::Bind()
