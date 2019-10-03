@@ -1,11 +1,12 @@
-
-
 #include <Andromeda/Graphics/Text/TextureAtlas.h>
+#include <Andromeda/Graphics/TextureManager.h>
 #include <Andromeda/Graphics/RenderManager.h>
 
 //#define STB_IMAGE_WRITE_IMPLEMENTATION
-//#include "stb_image.h"
-//#include "stb_image_write.h"
+#include "stb_image.h"
+#include "stb_image_write.h"
+
+
 
 namespace Andromeda
 {
@@ -33,6 +34,28 @@ namespace Andromeda
 			}
 		}
 
+        void TextureAtlas::SaveTextur(std::string fileName)
+        {
+            //convert data to rgba
+            unsigned char* newData = Convert(_atlas->data, 1, 4, _width, _height);
+
+            //save image
+            stbi_write_png(fileName.c_str(), _width, _height, 4, newData, _width * 4);
+
+            //dalete data
+            delete[] newData;
+        }
+
+        void TextureAtlas::LoadTexture(std::string fileName)
+        {
+            _texture = TextureManager::Instance()->LoadFromFile(fileName);
+        }
+
+        void TextureAtlas::SetTexture(Texture* texture)
+        {
+            _texture = texture;
+        }
+
 		texture_atlas_t* TextureAtlas::GetAtlas()
 		{
 			return _atlas;
@@ -54,10 +77,12 @@ namespace Andromeda
 				delete[] newData;
 
 				//save test image
-				//stbi_write_png("atlas.png", _width, _height, 4, texture->GetImageData(), _width * 4);
+				//stbi_write_png("atlas.png", _width, _height, 4, _texture->GetImageData(), _width * 4);
 
-				RenderManager::Instance()->CreateTexture(_texture);
+ 				RenderManager::Instance()->CreateTexture(_texture);
 			}
+
+
 
 			return _texture;
 		}

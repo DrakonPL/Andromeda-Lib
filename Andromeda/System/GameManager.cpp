@@ -1,5 +1,3 @@
-
-
 #include <Andromeda/System/GameManager.h>
 #include <Andromeda/System/GameState.h>
 #include <Andromeda/Utils/SimpleProfiler.h>

@@ -1,5 +1,3 @@
-
-
 #include <Andromeda/System/GLFW/MemoryManagerGlfw.h>
 
 namespace Andromeda

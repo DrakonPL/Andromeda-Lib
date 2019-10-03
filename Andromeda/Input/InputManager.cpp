@@ -14,6 +14,11 @@
 #include <Andromeda/Input/RPI/InputManagerRpi.h>
 #endif
 
+#ifdef ANDROMEDA_SWITCH
+#include <Andromeda/Input/SWITCH/InputManagerSwitch.h>
+#endif
+
+
 namespace Andromeda
 {
 	namespace Input
@@ -44,6 +49,12 @@ namespace Andromeda
 				#ifdef ANDROMEDA_RPI
 				{
 					_inputManager = new InputManagerRpi();
+				}
+				#endif
+				
+				#ifdef ANDROMEDA_SWITCH
+				{
+					_inputManager = new InputManagerSwitch();
 				}
 				#endif
 			}

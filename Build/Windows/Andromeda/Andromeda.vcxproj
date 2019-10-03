@@ -56,6 +56,10 @@
       <PreprocessorDefinitions>ANDROMEDA_PC;ANDROMEDA_GLFW;ANDROMEDA_GL3;_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>..\..\..\;..\..\..\Libs;..\..\..\Libs\freetype\include;..\..\..\Libs\freetype_gl;..\..\..\Libs\glew\include;..\..\..\Libs\glfw\include;..\..\..\Libs\glm;..\..\..\Libs\stb;..\..\..\Libs\tiny_obj_loader;..\..\..\Libs\dirent;..\..\..\Libs\irrKlang\include;..\..\..\Libs\ffmpeg\include;..\..\..\Libs\portaudio\Include;..\..\..\Libs\tiny_gltf_loader;..\..\..\Libs\gif;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <TreatWarningAsError>false</TreatWarningAsError>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -149,12 +153,6 @@
     <ClCompile Include="..\..\..\Andromeda\Threading\WinSleep.cpp" />
     <ClCompile Include="..\..\..\Andromeda\Utils\Logger.cpp" />
     <ClCompile Include="..\..\..\Andromeda\Utils\SimpleProfiler.cpp" />
-    <ClCompile Include="..\..\..\Andromeda\Video\FFmpeg\AvUtils.cpp" />
-    <ClCompile Include="..\..\..\Andromeda\Video\FFmpeg\AvVideoPlayer.cpp" />
-    <ClCompile Include="..\..\..\Andromeda\Video\FFmpeg\FFmpegMovie.cpp" />
-    <ClCompile Include="..\..\..\Andromeda\Video\FFmpeg\FFmpegVideoManager.cpp" />
-    <ClCompile Include="..\..\..\Andromeda\Video\Movie.cpp" />
-    <ClCompile Include="..\..\..\Andromeda\Video\VideoManager.cpp" />
     <ClCompile Include="..\..\..\Libs\freetype_gl\distance-field.c" />
     <ClCompile Include="..\..\..\Libs\freetype_gl\edtaa3func.c" />
     <ClCompile Include="..\..\..\Libs\freetype_gl\font-manager.c" />
@@ -238,12 +236,6 @@
     <ClInclude Include="..\..\..\Andromeda\Utils\Logger.h" />
     <ClInclude Include="..\..\..\Andromeda\Utils\PlatformConfigurator.h" />
     <ClInclude Include="..\..\..\Andromeda\Utils\SimpleProfiler.h" />
-    <ClInclude Include="..\..\..\Andromeda\Video\FFmpeg\AvUtils.h" />
-    <ClInclude Include="..\..\..\Andromeda\Video\FFmpeg\AvVideoPlayer.h" />
-    <ClInclude Include="..\..\..\Andromeda\Video\FFmpeg\FFmpegMovie.h" />
-    <ClInclude Include="..\..\..\Andromeda\Video\FFmpeg\FFmpegVideoManager.h" />
-    <ClInclude Include="..\..\..\Andromeda\Video\Movie.h" />
-    <ClInclude Include="..\..\..\Andromeda\Video\VideoManager.h" />
     <ClInclude Include="..\..\..\Libs\freetype_gl\distance-field.h" />
     <ClInclude Include="..\..\..\Libs\freetype_gl\edtaa3func.h" />
     <ClInclude Include="..\..\..\Libs\freetype_gl\font-manager.h" />

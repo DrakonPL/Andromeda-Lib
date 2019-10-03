@@ -1,5 +1,3 @@
-
-
 #include <Andromeda/FileSystem/Sceio/SceioDirectory.h>
 #include <Andromeda/Utils/Logger.h>
 #include <string.h>

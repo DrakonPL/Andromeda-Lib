@@ -1,9 +1,12 @@
-
-
 #include <Andromeda/FileSystem/FileManager.h>
 #include <Andromeda/Utils/Logger.h>
 
 #ifdef ANDROMEDA_PC
+#include <Andromeda/FileSystem/Stdio/StdioFile.h>
+#include <Andromeda/FileSystem/Stdio/StdioDirectory.h>
+#endif
+
+#ifdef ANDROMEDA_SWITCH
 #include <Andromeda/FileSystem/Stdio/StdioFile.h>
 #include <Andromeda/FileSystem/Stdio/StdioDirectory.h>
 #endif
@@ -74,6 +77,12 @@ namespace Andromeda
 				directory = new StdioDirectory(loadName);
 			}
 			#endif
+			
+			#ifdef ANDROMEDA_SWITCH
+			{
+				directory = new StdioDirectory(loadName);
+			}
+			#endif
 
 			#ifdef ANDROMEDA_VITA
 			{
@@ -118,6 +127,12 @@ namespace Andromeda
 			BaseFile* newFile;
 
 			#ifdef ANDROMEDA_PC
+			{
+				newFile = new StdioFile(fileName, loadName);
+			}
+			#endif
+			
+			#ifdef ANDROMEDA_SWITCH
 			{
 				newFile = new StdioFile(fileName, loadName);
 			}

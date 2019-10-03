@@ -1,5 +1,3 @@
-
-
 #include <Andromeda/System/MemoryManager.h>
 
 #ifdef ANDROMEDA_GLFW
@@ -12,6 +10,10 @@
 
 #ifdef ANDROMEDA_RPI
 #include <Andromeda/System/RPI/MemoryManagerRpi.h>
+#endif
+
+#ifdef ANDROMEDA_SWITCH
+#include <Andromeda/System/SWITCH/MemoryManagerSwitch.h>
 #endif
 
 namespace Andromeda
@@ -40,6 +42,12 @@ namespace Andromeda
 					_memoryManager = new MemoryManagerGxm();
 				}
 				#endif
+
+                #ifdef ANDROMEDA_SWITCH
+                {
+                    _memoryManager = new MemoryManagerSwitch();
+                }
+                #endif
 				
 				#ifdef ANDROMEDA_RPI
 				{

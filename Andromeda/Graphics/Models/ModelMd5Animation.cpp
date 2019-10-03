@@ -1,5 +1,3 @@
-
-
 #include <Andromeda/Graphics/Models/ModelMd5Animation.h>
 #include <Andromeda/Graphics/Models/ModelMd5Utils.h>
 #include <Andromeda/FileSystem/FileManager.h>

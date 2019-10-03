@@ -1,27 +1,38 @@
-
-
 #include <Andromeda/Graphics/GL/ShaderGlsl.h>
 #include <Andromeda/FileSystem/FileManager.h>
 #include <Andromeda/Utils/Logger.h>
 
+#ifdef ANDROMEDA_GL3
+
 #define GLEW_STATIC
 #include <GL/glew.h>
 
+#endif
+
+#ifdef ANDROMEDA_SWITCH
+
+#include <switch.h>
+
+#include <EGL/egl.h>    // EGL library
+#include <EGL/eglext.h> // EGL extensions
+#include <glad/glad.h>  // glad library (OpenGL loader)
+
+#endif
 namespace Andromeda
 {
 	namespace Graphics
 	{
 		ShaderGlSl::ShaderGlSl() : Shader()
 		{
-			_shaderProgram = -1;
+			_shaderProgram = 9999;
 
-			_vertexShader = -1;
-			_fragmentShader = -1;
+			_vertexShader = 9999;
+			_fragmentShader = 9999;
 		}
 
 		ShaderGlSl::~ShaderGlSl()
 		{
-			if (_shaderProgram != -1)
+			if (_shaderProgram != 9999)
 			{
 				glDeleteProgram(_shaderProgram);
 			}
@@ -106,7 +117,7 @@ namespace Andromeda
 			if (!success)
 			{
 				glGetShaderInfoLog(shader, 512, NULL, infoLog);
-				Utils::Logger_Info("Shader: %s compilation error: %s\n", fileName.c_str(), infoLog);
+				Utils::Logger::Instance()->Log("Shader: %s compilation error: %s\n", fileName.c_str(), infoLog);
 			}
 
 			//delete text
@@ -144,7 +155,7 @@ namespace Andromeda
 			if (!success)
 			{
 				glGetShaderInfoLog(shader, 512, NULL, infoLog);
-				Utils::Logger_Info("Shader: %s compilation error: %s\n", shaderString.c_str(), infoLog);
+				Utils::Logger::Instance()->Log("Shader: %s compilation error: %s\n", shaderString.c_str(), infoLog);
 			}
 
 			return shader;
@@ -169,7 +180,7 @@ namespace Andromeda
 			if (!success)
 			{
 				glGetProgramInfoLog(shaderProgram, 512, NULL, infoLog);
-				Utils::Logger_Info("Shader link error: %s\n", infoLog);
+				Utils::Logger::Instance()->Log("Shader link error: %s\n", infoLog);
 			}
 
 			//detach shader

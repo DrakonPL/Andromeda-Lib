@@ -1,5 +1,3 @@
-
-
 #include <Andromeda/FileSystem/Sceio/SceioFile.h>
 #include <psp2/io/fcntl.h>
 #include <stdio.h>

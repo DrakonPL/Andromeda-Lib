@@ -1,7 +1,7 @@
-
-
 #include <Andromeda/Graphics/Models/ModelObj.h>
 #include <Andromeda/FileSystem/FileManager.h>
+
+#include <algorithm>
 
 namespace Andromeda
 {
@@ -416,7 +416,7 @@ namespace Andromeda
 
 		glm::mat4 ModelObj::GetModelMatrix()
 		{
-			_modelMatrix = glm::mat4();
+			_modelMatrix = glm::mat4(1.0);
 
 			//translation
 			_modelMatrix = glm::translate(_modelMatrix, _position);

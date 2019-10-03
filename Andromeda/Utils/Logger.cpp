@@ -1,5 +1,3 @@
-
-
 #include <Andromeda/Utils/Logger.h>
 
 #include <stdio.h>

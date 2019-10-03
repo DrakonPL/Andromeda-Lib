@@ -1,5 +1,3 @@
-
-
 #include <Andromeda/Graphics/Texture.h>
 #include <Andromeda/Graphics/RenderManager.h>
 #include <Andromeda/FileSystem/FileManager.h>

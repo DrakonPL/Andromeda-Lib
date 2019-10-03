@@ -1,5 +1,3 @@
-
-
 #include <Andromeda/Graphics/Text/FontManager.h>
 
 namespace Andromeda

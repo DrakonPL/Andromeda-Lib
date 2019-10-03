@@ -8,8 +8,6 @@ namespace Andromeda
 {
 	namespace Utils
 	{
-		#define Logger_Info( message,...)  Logger::Instance()->Info(__FILE__,__FUNCTION__,__LINE__,message,__VA_ARGS__)
-		#define Logger_Error( message,...)  Logger::Instance()->Error(__FILE__,__FUNCTION__,__LINE__,message,__VA_ARGS__)
 
 		class Logger
 		{
@@ -58,6 +56,10 @@ namespace Andromeda
 			//get logger state
 			bool IsActive();
 		};
+
+//#define Logger::Instance()->Log( message,...) (Logger::Instance()->Info(__FILE__,__FUNCTION__,__LINE__,message,__VA_ARGS__))
+//#define Logger_Error( message,...) (Logger::Instance()->Error(__FILE__,__FUNCTION__,__LINE__,message,__VA_ARGS__))
+
 
 	}
 }

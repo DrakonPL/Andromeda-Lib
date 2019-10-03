@@ -1,5 +1,3 @@
-
-
 #include <Andromeda/System/GameState.h>
 
 namespace Andromeda

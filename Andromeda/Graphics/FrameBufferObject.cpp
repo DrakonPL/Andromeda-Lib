@@ -1,5 +1,3 @@
-
-
 #include <Andromeda/Graphics/FrameBufferObject.h>
 
 namespace Andromeda

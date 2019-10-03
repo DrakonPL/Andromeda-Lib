@@ -1,5 +1,3 @@
-
-
 #include <Andromeda/FileSystem/Stdio/StdioDirectory.h>
 
 namespace Andromeda

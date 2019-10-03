@@ -29,6 +29,11 @@ namespace Andromeda
 			TextureAtlas(int width, int height);
 			~TextureAtlas();
 
+            void SaveTextur(std::string fileName);
+            void LoadTexture(std::string fileName);
+
+            void SetTexture(Texture* texture);
+
 			texture_atlas_t* GetAtlas();
 
 			Texture* CreateTexture();

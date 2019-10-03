@@ -1,5 +1,3 @@
-
-
 #include <Andromeda/Graphics/Sprite.h>
 
 namespace Andromeda
@@ -203,7 +201,7 @@ namespace Andromeda
 			//shader
 			_shader->Bind();
 
-			glm::mat4 model;
+			glm::mat4 model{ 1.0 };;
 			glm::vec2 size = _size * _scale;
 
 			model = glm::translate(model, glm::vec3(_position - (size / 2.0f), 0.0f));

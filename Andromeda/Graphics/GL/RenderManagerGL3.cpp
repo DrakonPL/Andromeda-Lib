@@ -1,5 +1,3 @@
-
-
 #include <Andromeda/Graphics/GL/RenderManagerGL3.h>
 #include <Andromeda/Graphics/GL/FrameBufferObjectGL3.h>
 #include <Andromeda/Graphics/GL/VertexBufferObjectGL3.h>
@@ -8,12 +6,30 @@
 #include <Andromeda/Graphics/VertexTypes.h>
 
 #include <Andromeda/System/MemoryManager.h>
+#include <Andromeda/Utils/Logger.h>
+
+
+#ifdef ANDROMEDA_GL3
 
 #define GLEW_STATIC
 #include <GL/glew.h>
 
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #include <stb/stb_image_write.h>
+
+#endif
+
+#ifdef ANDROMEDA_SWITCH
+
+#include <switch.h>
+
+#include <EGL/egl.h>    // EGL library
+#include <EGL/eglext.h> // EGL extensions
+#include <glad/glad.h>  // glad library (OpenGL loader)
+
+#endif
+
+
 
 namespace Andromeda
 {
@@ -24,12 +40,128 @@ namespace Andromeda
 			
 		}
 
+#ifdef ANDROMEDA_SWITCH
+        bool RenderManagerGL3::InitEgl(NWindow* win)
+		{
+            Utils::Logger::Instance()->Log("Init egl\n");
+
+            // Connect to the EGL default display
+            s_display = eglGetDisplay(EGL_DEFAULT_DISPLAY);
+            if (!s_display)
+            {
+                Utils::Logger::Instance()->Log("Could not connect to display! error: %d\n", eglGetError());
+                goto _fail0;
+            }
+
+            // Initialize the EGL display connection
+            eglInitialize(s_display, nullptr, nullptr);
+
+            // Select OpenGL (Core) as the desired graphics API
+            if (eglBindAPI(EGL_OPENGL_API) == EGL_FALSE)
+            {
+                Utils::Logger::Instance()->Log("Could not set API! error: %d", eglGetError());
+                goto _fail1;
+            }
+
+            // Get an appropriate EGL framebuffer configuration
+            EGLConfig config;
+            EGLint numConfigs;
+            static const EGLint framebufferAttributeList[] =
+            {
+                EGL_RENDERABLE_TYPE, EGL_OPENGL_BIT,
+                EGL_RED_SIZE,     8,
+                EGL_GREEN_SIZE,   8,
+                EGL_BLUE_SIZE,    8,
+                EGL_ALPHA_SIZE,   8,
+                EGL_DEPTH_SIZE,   24,
+                EGL_STENCIL_SIZE, 8,
+                EGL_NONE
+            };
+            eglChooseConfig(s_display, framebufferAttributeList, &config, 1, &numConfigs);
+            if (numConfigs == 0)
+            {
+               Utils::Logger::Instance()->Log("No config found! error: %d", eglGetError());
+                goto _fail1;
+            }
+
+            // Create an EGL window surface
+            s_surface = eglCreateWindowSurface(s_display, config, win, nullptr);
+            if (!s_surface)
+            {
+                Utils::Logger::Instance()->Log("Surface creation failed! error: %d", eglGetError());
+                goto _fail1;
+            }
+
+            // Create an EGL rendering context
+            static const EGLint contextAttributeList[] =
+            {
+                EGL_CONTEXT_OPENGL_PROFILE_MASK_KHR, EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT_KHR,
+                EGL_CONTEXT_MAJOR_VERSION_KHR, 4,
+                EGL_CONTEXT_MINOR_VERSION_KHR, 3,
+                EGL_NONE
+            };
+            s_context = eglCreateContext(s_display, config, EGL_NO_CONTEXT, contextAttributeList);
+            if (!s_context)
+            {
+                Utils::Logger::Instance()->Log("Context creation failed! error: %d", eglGetError());
+                goto _fail2;
+            }
+
+            // Connect the context to the surface
+            eglMakeCurrent(s_display, s_surface, s_surface, s_context);
+            return true;
+
+        _fail2:
+            eglDestroySurface(s_display, s_surface);
+            s_surface = nullptr;
+        _fail1:
+            eglTerminate(s_display);
+            s_display = nullptr;
+        _fail0:
+            return false;
+		}
+
+        void RenderManagerGL3::DeinitEgl()
+		{
+            if (s_display)
+            {
+                eglMakeCurrent(s_display, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT);
+                if (s_context)
+                {
+                    eglDestroyContext(s_display, s_context);
+                    s_context = nullptr;
+                }
+                if (s_surface)
+                {
+                    eglDestroySurface(s_display, s_surface);
+                    s_surface = nullptr;
+                }
+                eglTerminate(s_display);
+                s_display = nullptr;
+            }
+		}
+
+#endif
+
 		void RenderManagerGL3::Init()
 		{
+			#ifdef ANDROMEDA_GL3
+
 			glewExperimental = GL_TRUE;
 
 			//init glwe lib
 			glewInit();
+
+			#endif
+			
+			#ifdef ANDROMEDA_SWITCH
+
+            // Load OpenGL routines using glad
+            gladLoadGL();
+
+
+			#endif
+			
 
 			// Define the viewport dimensions
 			glViewport(0, 0, _width, _height);
@@ -53,7 +185,11 @@ namespace Andromeda
 
 		void RenderManagerGL3::Finish()
 		{
-			
+#ifdef ANDROMEDA_SWITCH
+
+            DeinitEgl();
+
+#endif
 		}
 
 		void RenderManagerGL3::ClearScreen()
@@ -82,7 +218,11 @@ namespace Andromeda
 
 		void RenderManagerGL3::SwapBuffers()
 		{
-			
+            #ifdef ANDROMEDA_SWITCH
+
+            eglSwapBuffers(s_display, s_surface);
+
+            #endif
 		}
 
 		void RenderManagerGL3::CreateTexture(Texture* image)
@@ -160,8 +300,8 @@ namespace Andromeda
 					// Set texture filtering parameters
 					if (image->GetFilterType() == TextureFilerType::LinearFilter)
 					{
+                        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 						glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-						glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 					}
 					else
 					{

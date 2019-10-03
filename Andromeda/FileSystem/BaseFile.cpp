@@ -1,5 +1,3 @@
-
-
 #include <Andromeda/FileSystem/BaseFile.h>
 
 namespace Andromeda

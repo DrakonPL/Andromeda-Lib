@@ -1,5 +1,3 @@
-
-
 #include <Andromeda/Graphics/Shader.h>
 
 namespace Andromeda

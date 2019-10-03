@@ -3,6 +3,11 @@
 
 #include <ctime>
 
+#ifdef ANDROMEDA_SWITCH
+#include <sys/time.h>
+#endif
+
+
 namespace Andromeda
 {
 	namespace System
@@ -11,7 +16,16 @@ namespace Andromeda
 		{
 		private:
 
-			clock_t lastTime;
+#ifdef ANDROMEDA_SWITCH
+            timeval lastTime;
+#else
+            clock_t lastTime;
+#endif
+
+			
+
+
+
 			float msec;
 
 		public:

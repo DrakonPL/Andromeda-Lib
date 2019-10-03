@@ -187,7 +187,7 @@ namespace Andromeda
 
 			for (iter = _images.begin(); iter != _images.end(); ++iter)
 			{
-				Utils::Logger_Info("Delete texture: %s \n", iter->first.c_str());
+				Utils::Logger::Instance()->Log("Delete texture: %s \n", iter->first.c_str());
 
 				delete iter->second;
 			}

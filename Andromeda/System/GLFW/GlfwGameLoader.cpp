@@ -1,5 +1,3 @@
-
-
 #include <Andromeda/System/GLFW/GlfwGameLoader.h>
 #include <Andromeda/Input/InputManager.h>
 #include <Andromeda/Input/GLFW/InputManagerGlfw.h>
@@ -19,12 +17,12 @@ namespace Andromeda
 
 		void GlfwGameLoader::Run()
 		{
-			Utils::Logger_Info("Start\n");
+			Utils::Logger::Instance()->Log("Start\n");
 
 			//init library
 			if (!glfwInit())
 			{
-				Utils::Logger_Info("Failed to create initialize GLFW\n");
+				Utils::Logger::Instance()->Log("Failed to create initialize GLFW\n");
 				return;
 			}
 
@@ -115,7 +113,7 @@ namespace Andromeda
 			glfwTerminate();
 
 			//log exit
-			Utils::Logger_Info("Exit\n");
+			Utils::Logger::Instance()->Log("Exit\n");
 		}
 
 	}

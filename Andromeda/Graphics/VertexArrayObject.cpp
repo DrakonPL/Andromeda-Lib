@@ -1,5 +1,3 @@
-
-
 #include <Andromeda/Graphics/VertexArrayObject.h>
 
 namespace Andromeda

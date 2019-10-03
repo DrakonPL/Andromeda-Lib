@@ -64,12 +64,6 @@
     <Filter Include="Andromeda\Network\WinSock">
       <UniqueIdentifier>{f15d77a1-1c83-4771-9221-900c2125bafc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Andromeda\Video">
-      <UniqueIdentifier>{3e019f4e-cc43-4ee4-8642-821cc1f67c7a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Andromeda\Video\FFmpeg">
-      <UniqueIdentifier>{abbab878-3844-4929-a078-231fbf6c54c6}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Andromeda\System\GameManager.cpp">
@@ -260,24 +254,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Andromeda\Input\GLFW\GamepadDeviceGlfw.cpp">
       <Filter>Andromeda\Input\GLFW</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Andromeda\Video\FFmpeg\AvUtils.cpp">
-      <Filter>Andromeda\Video\FFmpeg</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Andromeda\Video\FFmpeg\AvVideoPlayer.cpp">
-      <Filter>Andromeda\Video\FFmpeg</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Andromeda\Video\Movie.cpp">
-      <Filter>Andromeda\Video</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Andromeda\Video\VideoManager.cpp">
-      <Filter>Andromeda\Video</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Andromeda\Video\FFmpeg\FFmpegMovie.cpp">
-      <Filter>Andromeda\Video\FFmpeg</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Andromeda\Video\FFmpeg\FFmpegVideoManager.cpp">
-      <Filter>Andromeda\Video\FFmpeg</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Andromeda\Graphics\Models\ModelMaterial.cpp">
       <Filter>Andromeda\Graphics\Models</Filter>
@@ -535,24 +511,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Andromeda\Input\GLFW\GamepadDeviceGlfw.h">
       <Filter>Andromeda\Input\GLFW</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Andromeda\Video\FFmpeg\AvUtils.h">
-      <Filter>Andromeda\Video\FFmpeg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Andromeda\Video\FFmpeg\AvVideoPlayer.h">
-      <Filter>Andromeda\Video\FFmpeg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Andromeda\Video\Movie.h">
-      <Filter>Andromeda\Video</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Andromeda\Video\VideoManager.h">
-      <Filter>Andromeda\Video</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Andromeda\Video\FFmpeg\FFmpegMovie.h">
-      <Filter>Andromeda\Video\FFmpeg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Andromeda\Video\FFmpeg\FFmpegVideoManager.h">
-      <Filter>Andromeda\Video\FFmpeg</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Andromeda\Utils\SimpleProfiler.h">
       <Filter>Andromeda\Utils</Filter>

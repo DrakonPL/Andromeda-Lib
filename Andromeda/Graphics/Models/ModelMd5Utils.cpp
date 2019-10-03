@@ -1,5 +1,3 @@
-
-
 #include <Andromeda/Graphics/Models/ModelMd5Utils.h>
 
 #include <iostream>     // std::cin, std::cout

@@ -12,7 +12,19 @@ namespace Andromeda
 {
 	namespace Graphics
 	{
-		#define RGBA8(r,g,b,a) ((((a)&0xFF)<<24) | (((b)&0xFF)<<16) | (((g)&0xFF)<<8) | (((r)&0xFF)<<0))
+
+		
+		#ifdef ANDROMEDA_GL3
+				#define RGBA8(r,g,b,a) ((((a)&0xFF)<<24) | (((b)&0xFF)<<16) | (((g)&0xFF)<<8) | (((r)&0xFF)<<0))
+		#endif
+
+        #ifdef ANDROMEDA_SWITCH
+        #define RGBA8(r,g,b,a) ((((a)&0xFF)<<24) | (((b)&0xFF)<<16) | (((g)&0xFF)<<8) | (((r)&0xFF)<<0))
+        #endif
+
+		#ifdef ANDROMEDA_VITA
+				#define RGBA8(r,g,b,a) ((((a)&0xFF)<<24) | (((b)&0xFF)<<16) | (((g)&0xFF)<<8) | (((r)&0xFF)<<0))
+		#endif
 
 		class TextureManager;
 
@@ -38,6 +50,7 @@ namespace Andromeda
 		public:
 
 			size_t GetVertexSize(VertexType vertexType);
+            void DeleteVertexData(void* vertices, VertexType vertexType);
 
 			//window size
 			int GetWidth();

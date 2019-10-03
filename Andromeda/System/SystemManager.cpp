@@ -1,5 +1,3 @@
-
-
 #include <Andromeda/System/SystemManager.h>
 
 namespace Andromeda

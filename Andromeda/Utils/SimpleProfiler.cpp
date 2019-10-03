@@ -1,5 +1,3 @@
-
-
 #include <Andromeda/Utils/SimpleProfiler.h>
 
 namespace Andromeda

@@ -1,9 +1,11 @@
-
-
 #include <Andromeda/Graphics/RenderManager.h>
 #include <Andromeda/Graphics/VertexTypes.h>
 
 #ifdef ANDROMEDA_GL3
+#include <Andromeda/Graphics/GL/RenderManagerGL3.h>
+#endif
+
+#ifdef ANDROMEDA_SWITCH
 #include <Andromeda/Graphics/GL/RenderManagerGL3.h>
 #endif
 
@@ -22,6 +24,12 @@ namespace Andromeda
 			if(_renderManager == 0)
 			{
 				#ifdef ANDROMEDA_GL3
+				{
+					_renderManager = new RenderManagerGL3();
+				}								
+				#endif
+				
+				#ifdef ANDROMEDA_SWITCH
 				{
 					_renderManager = new RenderManagerGL3();
 				}								
@@ -78,6 +86,34 @@ namespace Andromeda
 			}
 
 			return 0;
+		}
+
+        void RenderManager::DeleteVertexData(void* vertices, VertexType vertexType)
+		{
+            //switch (vertexType)
+            //{
+            //case Simple:
+            //    delete[] (SimpleVertex*)vertices;
+            //    break;
+            //case Color:
+            //    delete[](ColorVertex);
+            //    break;
+            //case Textured:
+            //    delete[](TextureVertex);
+            //    break;
+            //case TextureNormal:
+            //    delete[](TextureNormalVertex);
+            //    break;
+            //case TextureColor:
+            //    delete[](TextureColorVertex);
+            //    break;
+            //case ColorNormal:
+            //    delete[](ColorNormalVertex);
+            //    break;
+            //case TextureColorNormal:
+            //    delete[](TextureColorNormalVertex);
+            //    break;
+            //}
 		}
 
 		int RenderManager::GetWidth()

@@ -3,6 +3,16 @@
 
 #include <Andromeda/Graphics/RenderManager.h>
 
+#ifdef ANDROMEDA_SWITCH
+
+#include <switch.h>
+
+#include <EGL/egl.h>    // EGL library
+#include <EGL/eglext.h> // EGL extensions
+#include <glad/glad.h>  // glad library (OpenGL loader)
+
+#endif
+
 namespace Andromeda
 {
 	namespace Graphics
@@ -15,9 +25,22 @@ namespace Andromeda
 
 			unsigned int _lastTextureId = 0;
 
+#ifdef ANDROMEDA_SWITCH
+
+            EGLDisplay s_display;
+            EGLContext s_context;
+            EGLSurface s_surface;
+
+#endif
+
 		public:			
 
 			RenderManagerGL3();
+
+#ifdef ANDROMEDA_SWITCH
+            bool InitEgl(NWindow* win);
+            void DeinitEgl();
+#endif
 
 			void Init();
 			void Finish();

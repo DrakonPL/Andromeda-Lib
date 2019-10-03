@@ -1,5 +1,3 @@
-
-
 #include <Andromeda/Graphics/Camera3d.h>
 
 namespace Andromeda
