@@ -166,6 +166,16 @@ namespace Andromeda
 			_texture = texture;
 		}
 
+        Shader* Sprite::GetSHader()
+        {
+            return _shader;
+        }
+
+        Texture* Sprite::GetTexture()
+        {
+            return _texture;
+        }
+
 		void Sprite::SetAngle(float angle)
 		{
 			_angle = angle;
@@ -284,12 +294,13 @@ namespace Andromeda
 			_indices[5] = 2;
 
 			//generate buffer object
-			_arrayObject->Generate();
+			_arrayObject->Generate(false);
 		}
 
 		void Sprite::UpdateSize()
 		{
-			TextureVertex* _simpleData = new TextureVertex[4];
+			//TextureVertex* _simpleData = new TextureVertex[4];
+			TextureVertex* _simpleData = static_cast<TextureVertex*>(_arrayObject->GetVertices());
 
 			_simpleData[0].x = 0.0f;	_simpleData[0].y = 0.0f;	_simpleData[0].z = 0.0f;
 			_simpleData[1].x = 0.0f;	_simpleData[1].y = 1.0f;	_simpleData[1].z = 0.0f;
@@ -304,7 +315,7 @@ namespace Andromeda
 			_simpleData[2].u = 1.0f * width;	_simpleData[2].v = 0.0f;
 			_simpleData[3].u = 1.0f * width;	_simpleData[3].v = 1.0f * height;
 
-			_arrayObject->UpdateVertices(_simpleData, 4);
+			_arrayObject->UpdateVertices(_simpleData, 4, false);
 		}
 	}
 }

@@ -17,6 +17,8 @@ namespace Andromeda
 			_vertices = 0;
 			_indices = 0;
 
+            _removeData = true;
+
 			_vertexType = VertexType::Simple;
 			_vertexPrimitive = VertexPrimitive::Triangle;
 			_vertexBufferDrawType = VertexBufferDrawType::StaticDraw;

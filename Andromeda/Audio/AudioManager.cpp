@@ -1,5 +1,3 @@
-
-
 #include <Andromeda/Audio/AudioManager.h>
 
 #ifdef ANDROMEDA_PC
@@ -9,6 +7,11 @@
 #ifdef ANDROMEDA_VITA
 #include <Andromeda/Audio/Vita/VitaAudioManager.h>
 #endif
+
+#ifdef ANDROMEDA_SWITCH
+#include <Andromeda/Audio/Switch/SwitchAudioManager.h>
+#endif
+
 
 namespace Andromeda
 {
@@ -34,6 +37,12 @@ namespace Andromeda
 				#ifdef ANDROMEDA_VITA
 				{
 					_audioManager = new VitaAudioManager();
+				}
+				#endif
+				
+				#ifdef ANDROMEDA_SWITCH
+				{
+					_audioManager = new SwitchAudioManager();
 				}
 				#endif
 				

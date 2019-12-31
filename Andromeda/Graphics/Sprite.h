@@ -58,6 +58,9 @@ namespace Andromeda
 			void SetShader(Shader* shader);
 			void SetTexture(Texture* texture);
 
+            Shader* GetSHader();
+            Texture* GetTexture();
+
 			void SetAngle(float angle);
 			void SetPosition(glm::vec2 position);
 			void SetSize(glm::vec2 size);

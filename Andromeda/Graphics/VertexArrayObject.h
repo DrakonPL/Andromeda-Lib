@@ -17,6 +17,8 @@ namespace Andromeda
 
 			unsigned int _vertexSize;
 
+            bool _removeData;
+
 			void* _vertices;
 			int _verticesCount;
 
@@ -33,6 +35,8 @@ namespace Andromeda
 
 			static int GetObjectCount() { return _objectCount; }
 
+            bool IsDataDeleted() { return _removeData; }
+
 		public:
 
 			virtual ~VertexArrayObject();
@@ -43,7 +47,7 @@ namespace Andromeda
 
 			virtual void CreateVertices(int count) = 0;
 			virtual void SetVertices(void* data, int count) = 0;
-			virtual void UpdateVertices(void* data, int count) = 0;
+			virtual void UpdateVertices(void* data, int count, bool deleteData = true) = 0;
 			virtual void* GetVertices() = 0;
 
 			virtual void CreateIndices(int count) = 0;
@@ -52,7 +56,7 @@ namespace Andromeda
 			virtual void UpdateIndices(void* data, int count) = 0;
 			virtual void* GetIndices() = 0;
 
-			virtual void Generate() = 0;
+			virtual void Generate(bool deleteData = true) = 0;
 			
 			virtual void Draw() = 0;
 

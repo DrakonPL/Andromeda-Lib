@@ -2,7 +2,7 @@
 #include <Andromeda/Graphics/TextureManager.h>
 #include <Andromeda/Graphics/RenderManager.h>
 
-//#define STB_IMAGE_WRITE_IMPLEMENTATION
+//define STB_IMAGE_WRITE_IMPLEMENTATION
 #include "stb_image.h"
 #include "stb_image_write.h"
 
@@ -36,14 +36,14 @@ namespace Andromeda
 
         void TextureAtlas::SaveTextur(std::string fileName)
         {
-            //convert data to rgba
-            unsigned char* newData = Convert(_atlas->data, 1, 4, _width, _height);
+            ////convert data to rgba
+            //unsigned char* newData = Convert(_atlas->data, 1, 4, _width, _height);
 
-            //save image
-            stbi_write_png(fileName.c_str(), _width, _height, 4, newData, _width * 4);
+            ////save image
+            //stbi_write_png(fileName.c_str(), _width, _height, 4, newData, _width * 4);
 
-            //dalete data
-            delete[] newData;
+            ////dalete data
+            //delete[] newData;
         }
 
         void TextureAtlas::LoadTexture(std::string fileName)

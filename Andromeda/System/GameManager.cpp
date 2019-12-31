@@ -70,29 +70,29 @@ namespace Andromeda
 
 		void GameManager::HandleEvents()
 		{
-			Utils::SimpleProfiler::Instance()->BeginSection("HandleEvents");
+			//Utils::SimpleProfiler::Instance()->BeginSection("HandleEvents");
 			{
 				_states.back()->HandleEvents(this);
 			}
-			Utils::SimpleProfiler::Instance()->EndSection();
+			//Utils::SimpleProfiler::Instance()->EndSection();
 		}
 
 		void GameManager::Update()
 		{
-			Utils::SimpleProfiler::Instance()->BeginSection("Update");
+			//Utils::SimpleProfiler::Instance()->BeginSection("Update");
 			{
 				_states.back()->Update(this);
 			}
-			Utils::SimpleProfiler::Instance()->EndSection();
+			//Utils::SimpleProfiler::Instance()->EndSection();
 		}
 
 		void GameManager::Draw()
 		{
-			Utils::SimpleProfiler::Instance()->BeginSection("Draw");
+			//Utils::SimpleProfiler::Instance()->BeginSection("Draw");
 			{
 				_states.back()->Draw(this);
 			}
-			Utils::SimpleProfiler::Instance()->EndSection();
+			//Utils::SimpleProfiler::Instance()->EndSection();
 		}
 	}
 }

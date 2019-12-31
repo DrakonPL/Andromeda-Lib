@@ -41,6 +41,12 @@ namespace Andromeda
 				glDeleteBuffers(1, &_vbo);
 				glDeleteBuffers(1, &_vbi);
 			}
+
+            if (!_removeData)
+            {
+                delete[] _vertices;
+                delete[] _indices;
+            }
 		}
 
 		void VertexArrayObjectGL3::SetVertexPrimitive(VertexPrimitive vertexPrimitive)
@@ -87,7 +93,7 @@ namespace Andromeda
 			_verticesCount = count;
 		}
 
-		void VertexArrayObjectGL3::UpdateVertices(void* data, int count)
+		void VertexArrayObjectGL3::UpdateVertices(void* data, int count, bool deleteData)
 		{
 			if (_vbo != -1)
 			{
@@ -95,7 +101,8 @@ namespace Andromeda
 				glBufferSubData(GL_ARRAY_BUFFER, 0,_vertexSize * count, data);
 				glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-				delete [] data;
+                if(deleteData)
+				    delete [] data;
 			}
 		}
 
@@ -138,8 +145,10 @@ namespace Andromeda
 			return _indices;
 		}
 
-		void VertexArrayObjectGL3::Generate()
+		void VertexArrayObjectGL3::Generate(bool deleteData)
 		{
+            _removeData = deleteData;
+
 			//generate vertex buffer object
 			glGenBuffers(1, &_vbo);
 			glBindBuffer(GL_ARRAY_BUFFER, _vbo);
@@ -155,8 +164,11 @@ namespace Andromeda
 			
 			glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-			//it's safe to delete vertices info
-			delete[] _vertices;
+            if (_removeData)
+            {
+                //it's safe to delete vertices info
+                delete[] _vertices;
+            }
 
 			//generate indices buffer
 			glGenBuffers(1, &_vbi);
@@ -173,8 +185,11 @@ namespace Andromeda
 			
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
-			//it's safe to delete indices info
-			delete[] _indices;
+            if (_removeData)
+            {
+                //it's safe to delete indices info
+                delete[] _indices;
+            }
 
 			//generate vertex array object
 			glGenVertexArrays(1, &_vao);

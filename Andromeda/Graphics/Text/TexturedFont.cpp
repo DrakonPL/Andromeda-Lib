@@ -652,7 +652,8 @@ namespace Andromeda
 					else
 					{
 						//update existing buffer
-						_simpleData = new TextureColorVertex[verts];
+						//_simpleData = new TextureColorVertex[verts];
+                        _simpleData = static_cast<TextureColorVertex*>(_vertexArray->GetVertices());
 						update = true;
 					}
 				}
@@ -771,12 +772,12 @@ namespace Andromeda
 
 				if (update)
 				{
-					_vertexArray->UpdateVertices(_simpleData, verts);
+					_vertexArray->UpdateVertices(_simpleData, verts, false);
 					_vertexArray->SetIndicesNumber(indices);
 				}
 				else
 				{
-					_vertexArray->Generate();
+					_vertexArray->Generate(false);
 				}
 			}
 
