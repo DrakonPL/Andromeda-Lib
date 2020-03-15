@@ -12,6 +12,8 @@ namespace Andromeda
 		class TouchDeviceSwitch : public TouchDevice
 		{
 			TouchDeviceSwitch();
+			
+			int _touchCount;
 
 		public:
 

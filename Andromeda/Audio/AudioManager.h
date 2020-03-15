@@ -15,8 +15,9 @@ namespace Andromeda
 			static AudioManager *_audioManager;
 
 		public:
+            virtual ~AudioManager() = default;
 
-			AudioManager();
+            AudioManager();
 
 			static AudioManager* Instance();
 

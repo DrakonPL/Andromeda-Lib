@@ -11,6 +11,12 @@ namespace Andromeda
 		{
 			
 		}
+		
+		void GamepadDeviceSwitch::UpdateKesy(u64 kDown,u64 kUp)
+		{
+			_kDown = kDown;
+			_kUp = kUp;
+		}
 
 		int GamepadDeviceSwitch::LeftAnalogX()
 		{
@@ -41,47 +47,49 @@ namespace Andromeda
 		bool GamepadDeviceSwitch::KeyDown(Gamepad::Button button)
 		{
 			//hidKeysDown returns information about which buttons have been just pressed (and they weren't in the previous frame)
-			//u64 kDown = hidKeysDown(CONTROLLER_P1_AUTO);
-			u64 kDown = hidKeysHeld(CONTROLLER_P1_AUTO);
+			//_kDown = hidKeysDown(CONTROLLER_P1_AUTO);
+			//u64 kDown = hidKeysHeld(CONTROLLER_P1_AUTO);
 			
 			//check states			
 			switch(button)
 			{
 			case Gamepad::Left: 
-				return (kDown & KEY_DLEFT);
+				return (_kDown & KEY_DLEFT);
 				break;
 			case Gamepad::Right: 
-				return (kDown & KEY_DRIGHT);
+				return (_kDown & KEY_DRIGHT);
 				break;
 			case Gamepad::Up: 
-				return (kDown & KEY_DUP);
+				return (_kDown & KEY_DUP);
 				break;
 			case Gamepad::Down: 
-				return (kDown & KEY_DDOWN);
+				return (_kDown & KEY_DDOWN);
 				break;
 			case Gamepad::Triangle: 
-				return (kDown & KEY_X);
+				return (_kDown & KEY_X);
 				break;
 			case Gamepad::Square: 
-				return (kDown & KEY_Y);
+				return (_kDown & KEY_Y);
 				break;
 			case Gamepad::Circle: 
-				return (kDown & KEY_A);
+				return (_kDown & KEY_A);
 				break;
 			case Gamepad::Cross: 
-				return (kDown & KEY_B);
+				return (_kDown & KEY_B);
 				break;
 			case Gamepad::LTrigger:
-				return (kDown & KEY_L);
+				return (_kDown & KEY_L);
 				break;
 			case Gamepad::RTrigger:
-				return (kDown & KEY_R);
-				break;
-			case Gamepad::Start:
-				return (kDown & KEY_MINUS);
+				return (_kDown & KEY_R);
 				break;
 			case Gamepad::Select:
-				return (kDown & KEY_PLUS);
+				return (_kDown & KEY_MINUS);
+				break;
+			case Gamepad::Start:
+				return (_kDown & KEY_PLUS);
+				break;
+
 				break;
 			}
 
@@ -91,47 +99,47 @@ namespace Andromeda
 		bool GamepadDeviceSwitch::KeyUp(Gamepad::Button button)
 		{
 			//hidKeysDown returns information about which buttons have been just pressed (and they weren't in the previous frame)
-			u64 kDown = hidKeysHeld(CONTROLLER_P1_AUTO);
+			//u64 kDown = hidKeysHeld(CONTROLLER_P1_AUTO);
 			
 			//check states			
 
 			switch(button)
 			{
 			case Gamepad::Left: 
-				return !(kDown & KEY_DLEFT);
+				return !(_kUp & KEY_DLEFT);
 				break;
 			case Gamepad::Right: 
-				return !(kDown & KEY_DRIGHT);
+				return !(_kUp & KEY_DRIGHT);
 				break;
 			case Gamepad::Up: 
-				return !(kDown & KEY_DUP);
+				return !(_kUp & KEY_DUP);
 				break;
 			case Gamepad::Down: 
-				return !(kDown & KEY_DDOWN);
+				return !(_kUp & KEY_DDOWN);
 				break;
 			case Gamepad::Triangle: 
-				return !(kDown & KEY_X);
+				return !(_kUp & KEY_X);
 				break;
 			case Gamepad::Square: 
-				return !(kDown & KEY_Y);
+				return !(_kUp & KEY_Y);
 				break;
 			case Gamepad::Circle: 
-				return !(kDown & KEY_A);
+				return !(_kUp & KEY_A);
 				break;
 			case Gamepad::Cross: 
-				return !(kDown & KEY_B);
+				return !(_kUp & KEY_B);
 				break;
 			case Gamepad::LTrigger:
-				return !(kDown & KEY_L);
+				return !(_kUp & KEY_L);
 				break;
 			case Gamepad::RTrigger:
-				return !(kDown & KEY_R);
-				break;
-			case Gamepad::Start:
-				return !(kDown & KEY_MINUS);
+				return !(_kUp & KEY_R);
 				break;
 			case Gamepad::Select:
-				return !(kDown & KEY_PLUS);
+				return !(_kUp & KEY_MINUS);
+				break;
+			case Gamepad::Start:
+				return !(_kUp & KEY_PLUS);
 				break;
 			}
 

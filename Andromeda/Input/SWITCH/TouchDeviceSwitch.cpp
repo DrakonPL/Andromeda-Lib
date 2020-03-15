@@ -1,27 +1,41 @@
 #include <Andromeda/Input/SWITCH/TouchDeviceSwitch.h>
 
+#include <switch.h>
+
 namespace Andromeda
 {
 	namespace Input
 	{
 		TouchDeviceSwitch::TouchDeviceSwitch()
 		{
-			
+			_touchCount = 0;
 		}
 
 		int TouchDeviceSwitch::GetTouchCount()
 		{
-			return 0;
+			return hidTouchCount();
 		}
 
-		int TouchDeviceSwitch::GetTouchX(int touch)
+		int TouchDeviceSwitch::GetTouchX(int touchNumber)
 		{
-			return 0;
+			touchPosition touch;
+			
+			//Read the touch screen coordinates
+            hidTouchRead(&touch, touchNumber);
+			
+			
+			return touch.px;
 		}
 
-		int TouchDeviceSwitch::GetTouchY(int touch)
+		int TouchDeviceSwitch::GetTouchY(int touchNumber)
 		{
-			return 0;
+			touchPosition touch;
+			
+			//Read the touch screen coordinates
+            hidTouchRead(&touch, touchNumber);
+			
+			
+			return touch.py;
 		}
 
 	}

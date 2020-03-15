@@ -57,14 +57,8 @@ namespace Andromeda
 			while (_gameManager->Running() && appletMainLoop())
 			{
 				//update input manager
-				//intputManager->Update();
-				
-				//Scan all the inputs. This should be done once for each frame
-				hidScanInput();
-				
-				//u32 kDown = hidKeysDown(CONTROLLER_P1_AUTO);
-				//if (kDown & KEY_DRIGHT)
-				//	break;
+				intputManager->Update();
+
 
 				//game stuff
 				_gameManager->HandleEvents();

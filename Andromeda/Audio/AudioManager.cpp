@@ -1,15 +1,20 @@
 #include <Andromeda/Audio/AudioManager.h>
 
 #ifdef ANDROMEDA_PC
-#include <Andromeda/Audio/IrrKlang/IrrAudioManager.h>
+//#include <Andromeda/Audio/IrrKlang/IrrAudioManager.h>
 #endif
+
+#ifdef ANDROMEDA_PC
+#include <Andromeda/Audio/Sdl/SdlAudioManager.h>
+#endif
+
 
 #ifdef ANDROMEDA_VITA
 #include <Andromeda/Audio/Vita/VitaAudioManager.h>
 #endif
 
 #ifdef ANDROMEDA_SWITCH
-#include <Andromeda/Audio/Switch/SwitchAudioManager.h>
+#include <Andromeda/Audio/Sdl/SdlAudioManager.h>
 #endif
 
 
@@ -30,7 +35,7 @@ namespace Andromeda
 			{
 				#ifdef ANDROMEDA_PC
 				{
-					_audioManager = new IrrAudioManager();
+					_audioManager = new SdlAudioManager();
 				}
 				#endif
 
@@ -42,7 +47,7 @@ namespace Andromeda
 				
 				#ifdef ANDROMEDA_SWITCH
 				{
-					_audioManager = new SwitchAudioManager();
+					_audioManager = new SdlAudioManager();
 				}
 				#endif
 				

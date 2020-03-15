@@ -8,6 +8,12 @@ namespace Andromeda
 {
 	namespace Input
 	{
+		InputManagerSwitch::InputManagerSwitch()
+		{
+			_gamepad = new GamepadDeviceSwitch(); 
+		}
+		
+		
 		int InputManagerSwitch::GetKayboardCount()
 		{
 			return 0;
@@ -30,7 +36,17 @@ namespace Andromeda
 
 		void InputManagerSwitch::Update()
 		{
+			//Scan all the inputs. This should be done once for each frame
+			hidScanInput();
 			
+			//update data for pad 1
+			//u64 kDown = hidKeysDown(CONTROLLER_P1_AUTO);
+			//u64 kUp = hidKeysUp(CONTROLLER_P1_AUTO);
+			
+			u64 kHeld = hidKeysHeld(CONTROLLER_P1_AUTO);
+			
+			//update Ggamepad device
+			_gamepad->UpdateKesy(kHeld,kHeld);
 		}
 
 		KeyboardDevice* InputManagerSwitch::GetKeyboard(int deviceNumber)
@@ -45,7 +61,7 @@ namespace Andromeda
 
 		GamepadDevice* InputManagerSwitch::GetGamepad(int deviceNumber)
 		{
-			return new GamepadDeviceSwitch();
+			return _gamepad;
 		}
 
 		TouchDevice* InputManagerSwitch::GetTouch(int deviceNumber)

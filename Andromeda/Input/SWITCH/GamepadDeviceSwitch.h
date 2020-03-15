@@ -4,6 +4,7 @@
 #include <Andromeda/Input/InputEnums.h>
 #include <Andromeda/Input/GamepadDevice.h>
 
+#include <switch.h>
 
 namespace Andromeda
 {
@@ -15,6 +16,11 @@ namespace Andromeda
 		{
 		
 			GamepadDeviceSwitch();
+			
+			private:
+			
+			u64 _kDown;
+			u64 _kUp;
 
 		public:
 
@@ -26,6 +32,8 @@ namespace Andromeda
 
 			bool KeyDown(Gamepad::Button button);
 			bool KeyUp(Gamepad::Button button);
+			
+			void UpdateKesy(u64 kDown,u64 kUp);
 
 			friend class InputManagerSwitch;
 

@@ -64,6 +64,9 @@
     <Filter Include="Andromeda\Network\WinSock">
       <UniqueIdentifier>{f15d77a1-1c83-4771-9221-900c2125bafc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Andromeda\Audio\Sdl">
+      <UniqueIdentifier>{7880f6e1-b55a-40c5-bf2a-cb3b7c0badd1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Andromeda\System\GameManager.cpp">
@@ -272,6 +275,12 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Andromeda\Graphics\Models\ModelMd5Utils.cpp">
       <Filter>Andromeda\Graphics\Models</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Andromeda\Audio\Sdl\SdlAudioManager.cpp">
+      <Filter>Andromeda\Audio\Sdl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Andromeda\Audio\Sdl\SdlSound.cpp">
+      <Filter>Andromeda\Audio\Sdl</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -523,6 +532,12 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Andromeda\Graphics\Models\ModelMd5Utils.h">
       <Filter>Andromeda\Graphics\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Andromeda\Audio\Sdl\SdlAudioManager.h">
+      <Filter>Andromeda\Audio\Sdl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Andromeda\Audio\Sdl\SdlSound.h">
+      <Filter>Andromeda\Audio\Sdl</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -54,7 +54,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>ANDROMEDA_PC;ANDROMEDA_GLFW;ANDROMEDA_GL3;_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\..\;..\..\..\Libs;..\..\..\Libs\freetype\include;..\..\..\Libs\freetype_gl;..\..\..\Libs\glew\include;..\..\..\Libs\glfw\include;..\..\..\Libs\glm;..\..\..\Libs\stb;..\..\..\Libs\tiny_obj_loader;..\..\..\Libs\dirent;..\..\..\Libs\irrKlang\include;..\..\..\Libs\ffmpeg\include;..\..\..\Libs\portaudio\Include;..\..\..\Libs\tiny_gltf_loader;..\..\..\Libs\gif;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\;..\..\..\Libs;..\..\..\Libs\freetype\include;..\..\..\Libs\freetype_gl;..\..\..\Libs\glew\include;..\..\..\Libs\glfw\include;..\..\..\Libs\glm;..\..\..\Libs\stb;..\..\..\Libs\tiny_obj_loader;..\..\..\Libs\dirent;..\..\..\Libs\irrKlang\include;..\..\..\Libs\ffmpeg\include;..\..\..\Libs\portaudio\Include;..\..\..\Libs\tiny_gltf_loader;..\..\..\Libs\gif;..\..\..\Libs\sdl\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <TreatWarningAsError>false</TreatWarningAsError>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -96,6 +96,8 @@
     <ClCompile Include="..\..\..\Andromeda\Audio\AudioManager.cpp" />
     <ClCompile Include="..\..\..\Andromeda\Audio\IrrKlang\IrrAudioManager.cpp" />
     <ClCompile Include="..\..\..\Andromeda\Audio\IrrKlang\IrrSound.cpp" />
+    <ClCompile Include="..\..\..\Andromeda\Audio\Sdl\SdlAudioManager.cpp" />
+    <ClCompile Include="..\..\..\Andromeda\Audio\Sdl\SdlSound.cpp" />
     <ClCompile Include="..\..\..\Andromeda\Audio\Sound.cpp" />
     <ClCompile Include="..\..\..\Andromeda\FileSystem\BaseDirectory.cpp" />
     <ClCompile Include="..\..\..\Andromeda\FileSystem\BaseFile.cpp" />
@@ -167,6 +169,8 @@
     <ClInclude Include="..\..\..\Andromeda\Audio\AudioManager.h" />
     <ClInclude Include="..\..\..\Andromeda\Audio\IrrKlang\IrrAudioManager.h" />
     <ClInclude Include="..\..\..\Andromeda\Audio\IrrKlang\IrrSound.h" />
+    <ClInclude Include="..\..\..\Andromeda\Audio\Sdl\SdlAudioManager.h" />
+    <ClInclude Include="..\..\..\Andromeda\Audio\Sdl\SdlSound.h" />
     <ClInclude Include="..\..\..\Andromeda\Audio\Sound.h" />
     <ClInclude Include="..\..\..\Andromeda\FileSystem\BaseDirectory.h" />
     <ClInclude Include="..\..\..\Andromeda\FileSystem\BaseFile.h" />
