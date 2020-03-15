@@ -24,11 +24,11 @@ namespace Andromeda
 		void GameLoaderGxm::Run()
 		{
 			//hack
-			sceIoMkdir("ux0:/data/tests", 0777);
+			sceIoMkdir("ux0:/data/jelly", 0777);
 			
 			//set main dir location
 			FileSystem::FileManager::Instance()->SetMainDirPath("app0:/");
-			FileSystem::FileManager::Instance()->SetSaveDirPath("ux0:/data/tests/");
+			FileSystem::FileManager::Instance()->SetSaveDirPath("ux0:/data/jelly/");
 
 			//
 			Utils::Logger::Instance()->Log("Start\n");

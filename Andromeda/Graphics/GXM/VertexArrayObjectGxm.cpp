@@ -86,12 +86,13 @@ namespace Andromeda
 			_verticesCount = count;
 		}
 
-		void VertexArrayObjectGxm::UpdateVertices(void* data, int count)
+		void VertexArrayObjectGxm::UpdateVertices(void* data, int count, bool deleteData)
 		{
 			_verticesCount = count;
 			std::memcpy(_vertices, data, _verticesCount * _vertexSize);			
 
-			delete[] data;
+			if(deleteData)
+				delete[] data;
 		}
 
 		void* VertexArrayObjectGxm::GetVertices()
@@ -136,7 +137,7 @@ namespace Andromeda
 			return _indices;
 		}
 
-		void VertexArrayObjectGxm::Generate()
+		void VertexArrayObjectGxm::Generate(bool deleteData)
 		{
 
 		}

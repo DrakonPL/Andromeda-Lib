@@ -26,27 +26,39 @@ namespace Andromeda
 			delete _gxmFragmentProgram;
 		}
 
-		void ShaderGxm::LoadFromFile(std::string vertexFile, std::string fragmentFile, VertexType vertexType)
+		bool ShaderGxm::LoadFromFile(std::string vertexFile, std::string fragmentFile, VertexType vertexType)
 		{
 			_vertexType = vertexType;
+			
+			Utils::Logger::Instance()->Log("LoadShaderFile(vertexFile,VertexShader);\n");
 
 			//load vertex shader
 			LoadShaderFile(vertexFile,VertexShader);
+			
+			Utils::Logger::Instance()->Log("LoadShaderFile(vertexFile,FragmentShader);\n");
 
 			//load fragment shader
 			LoadShaderFile(fragmentFile,FragmentShader);
+			
+			Utils::Logger::Instance()->Log("LinkShader;\n");
 
 			//link program
 			LinkShader();
+			
+			return true;
 		}
 
-		void ShaderGxm::LoadFromMemory(std::string vertexShader, std::string fragmentShader, VertexType vertexType)
+		bool ShaderGxm::LoadFromMemory(std::string vertexShader, std::string fragmentShader, VertexType vertexType)
 		{
 			_vertexType = vertexType;
+			
+			return true;
 		}
 
 		unsigned int ShaderGxm::LoadShaderFile(std::string fileName, ShaderType shaderType)
 		{
+			Utils::Logger::Instance()->Log("Test1 %s\n",fileName.c_str());
+			
 			FileSystem::BaseFile* file = FileSystem::FileManager::Instance()->GetFile(fileName);
 
 			if (!file->Exist())
@@ -56,6 +68,8 @@ namespace Andromeda
 			}				
 
 			file->Open(FileSystem::Read, FileSystem::Binary);
+			
+			Utils::Logger::Instance()->Log("Test2\n");
 
 			int size = 0;
 
@@ -70,21 +84,33 @@ namespace Andromeda
 
 			file->Close();
 			delete file;
+			
+			Utils::Logger::Instance()->Log("Test3\n");
 
 			if(shaderType == VertexShader)
 			{
+				Utils::Logger::Instance()->Log("Test4\n");
 				// check the shaders
 				sceGxmProgramCheck(_gxmVertexProgram);
+				
+				Utils::Logger::Instance()->Log("Test5\n");
 
 				// register programs with the patcher
 				sceGxmShaderPatcherRegisterProgram(_shaderPatcher, _gxmVertexProgram, &_vertexProgramId);
+				
+				Utils::Logger::Instance()->Log("Test6\n");
 			}else
 			{
+				Utils::Logger::Instance()->Log("Test4\n");
 				// check the shaders
 				sceGxmProgramCheck(_gxmFragmentProgram);
+				
+				Utils::Logger::Instance()->Log("Test5\n");
 
 				// register programs with the patcher
 				sceGxmShaderPatcherRegisterProgram(_shaderPatcher, _gxmFragmentProgram, &_fragmentProgramId);
+				
+				Utils::Logger::Instance()->Log("Test6\n");
 			}
 
 		}

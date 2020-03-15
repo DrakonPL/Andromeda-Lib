@@ -49,6 +49,9 @@ namespace Andromeda
 
 				Shader* shader = RenderManager::Instance()->CreateShader();
 
+				Utils::Logger::Instance()->Log("ShaderManager::LoadFromFile: shader created\n");
+				Utils::Logger::Instance()->Log("ShaderManager::LoadFromFile: loading %s and %s\n", vertexFile.c_str() , fragmentFile.c_str());
+
 				//set name
 				shader->SetName(name);
 

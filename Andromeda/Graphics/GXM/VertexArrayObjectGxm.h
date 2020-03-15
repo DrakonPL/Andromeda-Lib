@@ -38,7 +38,7 @@ namespace Andromeda
 
 			void CreateVertices(int count);
 			void SetVertices(void* data, int count);
-			void UpdateVertices(void* data, int count);
+			void UpdateVertices(void* data, int count, bool deleteData = true);
 			void* GetVertices();
 
 			void CreateIndices(int count);
@@ -47,7 +47,7 @@ namespace Andromeda
 			void UpdateIndices(void* data, int count);
 			void* GetIndices();
 
-			void Generate();
+			void Generate(bool deleteData = true);
 
 			void Draw();
 
