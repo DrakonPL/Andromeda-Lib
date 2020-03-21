@@ -12,6 +12,9 @@ namespace Andromeda
 		void InputManagerGlfw::SetGlfwWindow(GLFWwindow* window)
 		{
 			_window = window;
+
+			_padCount = 0;
+			_gamepad = nullptr;
 		}
 
 		int InputManagerGlfw::GetKayboardCount()
@@ -39,6 +42,8 @@ namespace Andromeda
 				}
 			}
 
+			_padCount = foundPads;
+
 			return foundPads;
 		}
 
@@ -49,7 +54,14 @@ namespace Andromeda
 
 		void InputManagerGlfw::Update()
 		{
-			
+            if (_padCount > 0 && _gamepad != nullptr)
+            {
+				int count;
+				const unsigned char* buttons = glfwGetJoystickButtons(0, &count);
+
+				_gamepad->UpdateButtons(buttons);
+            }
+
 		}
 
 		KeyboardDevice* InputManagerGlfw::GetKeyboard(int deviceNumber)
@@ -64,7 +76,12 @@ namespace Andromeda
 
 		GamepadDevice* InputManagerGlfw::GetGamepad(int deviceNumber)
 		{
-			return new GamepadDeviceGlfw(_window,deviceNumber);
+            if (_gamepad == nullptr)
+            {
+				_gamepad = new GamepadDeviceGlfw(_window, deviceNumber);
+            }
+
+			return _gamepad;
 		}
 
 		TouchDevice* InputManagerGlfw::GetTouch(int deviceNumber)

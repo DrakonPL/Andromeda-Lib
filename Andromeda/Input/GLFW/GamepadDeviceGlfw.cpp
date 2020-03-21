@@ -14,99 +14,150 @@ namespace Andromeda
 			_padNumber = number;
 		}
 
-		int GamepadDeviceGlfw::LeftAnalogX()
+		float GamepadDeviceGlfw::LeftAnalogX()
 		{
 			int count;
 			const float* axes = glfwGetJoystickAxes(_padNumber, &count);
 
 			if (count > 0)
 			{
-				return axes[0] * 128.0f;
+				return axes[0];
 			}
 
 			return 0;
 		}
 
-		int GamepadDeviceGlfw::LeftAnalogY()
+		float GamepadDeviceGlfw::LeftAnalogY()
 		{
 			int count;
 			const float* axes = glfwGetJoystickAxes(_padNumber, &count);
 
 			if (count > 1)
 			{
-				return axes[1] * -128.0f;
+				return axes[1];
 			}
 
 			return 0;
 		}
 
-		int GamepadDeviceGlfw::RightAnalogX()
+		float GamepadDeviceGlfw::RightAnalogX()
 		{
 			int count;
 			const float* axes = glfwGetJoystickAxes(_padNumber, &count);
 
 			if (count > 2)
 			{
-				return axes[2] * 128.0f;
+				return axes[2];
 			}
 
 			return 0;
 		}
-		int GamepadDeviceGlfw::RightAnalogY()
+
+		float GamepadDeviceGlfw::RightAnalogY()
 		{
 			int count;
 			const float* axes = glfwGetJoystickAxes(_padNumber, &count);
 
 			if (count > 3)
 			{
-				return axes[3] * -128.0f;
+				return axes[3];
 			}
 
 			return 0;
 		}
 
+		void GamepadDeviceGlfw::UpdateButtons(const unsigned char* buttons)
+		{
+			_buttons = buttons;
+		}
+
 		bool GamepadDeviceGlfw::KeyDown(Gamepad::Button button)
 		{
-			int count;
-			const unsigned char* buttons = glfwGetJoystickButtons(_padNumber, &count);
+			//int count;
+			//const unsigned char* buttons = glfwGetJoystickButtons(_padNumber, &count);
+
+
+			//printf("0:%d 1:%d 2:%d 3:%d 4:%d 5:%d 6:%d 7:%d 8:%d 9:%d 10:%d 11:%d 12:%d 13:%d\n", _buttons[0], _buttons[1], _buttons[2], _buttons[3], _buttons[4], _buttons[5], _buttons[6], _buttons[7], _buttons[8], _buttons[9], _buttons[10], _buttons[11], _buttons[12], _buttons[13]);
 
 			switch (button)
 			{
 			case Gamepad::Left:
-				return buttons[11];
+				return _buttons[13] == GLFW_PRESS;
 				break;
 			case Gamepad::Right:
-				return buttons[10];
+				return _buttons[11] == GLFW_PRESS;
 				break;
 			case Gamepad::Up:
-				return buttons[8];
+				return _buttons[10] == GLFW_PRESS;
 				break;
 			case Gamepad::Down:
-				return buttons[9];
+				return _buttons[12] == GLFW_PRESS;
 				break;
 			case Gamepad::Triangle:
-				return buttons[3];
+				return _buttons[3] == GLFW_PRESS;
 				break;
 			case Gamepad::Square:
-				return buttons[2];
+				return _buttons[2] == GLFW_PRESS;
 				break;
 			case Gamepad::Circle:
-				return buttons[1];
+				return _buttons[1] == GLFW_PRESS;
 				break;
 			case Gamepad::Cross:
-				return buttons[0];
+				return _buttons[0] == GLFW_PRESS;
 				break;
 			case Gamepad::LTrigger:
-				return buttons[4];
+				return _buttons[4] == GLFW_PRESS;
 				break;
 			case Gamepad::RTrigger:
-				return buttons[5];
+				return _buttons[5] == GLFW_PRESS;
 				break;
 			case Gamepad::Select:
-				return buttons[6];
+				return _buttons[6] == GLFW_PRESS;
 				break;
 			case Gamepad::Start:
-				return buttons[7];
+				return _buttons[7] == GLFW_PRESS;
+				break;
+            }
+
+
+			float toleranceLevel = 0.3f;
+
+			//specials
+			switch (button)
+			{
+			case Gamepad::LAnalogLeft:
+				return LeftAnalogX() < toleranceLevel * -1.0f;
+				break;
+			case Gamepad::LAnalogRight:
+				return LeftAnalogX() > toleranceLevel;
+				break;
+			case Gamepad::LAnalogUp:
+				return LeftAnalogY() > toleranceLevel;
+				break;
+			case Gamepad::LAnalogDown:
+				return LeftAnalogY() < toleranceLevel * -1.0f;
+				break;
+			case Gamepad::LAnalogPushed:
+				return _buttons[8];
+				break;
+			}
+
+			switch (button)
+			{
+			case Gamepad::RAnalogLeft:
+				return RightAnalogX() < toleranceLevel * -1.0f;
+				break;
+			case Gamepad::RAnalogRight:
+				return RightAnalogX() > toleranceLevel;
+				break;
+			case Gamepad::RAnalogUp:
+				return RightAnalogY() > toleranceLevel;
+				break;
+			case Gamepad::RAnalogDown:
+				return RightAnalogY() < toleranceLevel * -1.0f;
+				break;
+			case Gamepad::RAnalogPushed:
+				return _buttons[9];
 				break;
 			}
 
@@ -115,46 +166,87 @@ namespace Andromeda
 
 		bool GamepadDeviceGlfw::KeyUp(Gamepad::Button button)
 		{
-			int count;
-			const unsigned char* buttons = glfwGetJoystickButtons(_padNumber, &count);
+			//int count;
+			//const unsigned char* buttons = glfwGetJoystickButtons(_padNumber, &count);
 
 			switch (button)
 			{
 			case Gamepad::Left:
-				return !buttons[15];
+				return !_buttons[13];
 				break;
 			case Gamepad::Right:
-				return !buttons[13];
+				return !_buttons[11];
 				break;
 			case Gamepad::Up:
-				return !buttons[12];
+				return !_buttons[10];
 				break;
 			case Gamepad::Down:
-				return !buttons[14];
+				return !_buttons[12];
 				break;
 			case Gamepad::Triangle:
-				return !buttons[3];
+				return !_buttons[3];
 				break;
 			case Gamepad::Square:
-				return !buttons[0];
+				return !_buttons[2];
 				break;
 			case Gamepad::Circle:
-				return !buttons[2];
+				return !_buttons[1];
 				break;
 			case Gamepad::Cross:
-				return !buttons[1];
+				return !_buttons[0];
 				break;
 			case Gamepad::LTrigger:
-				return !buttons[4];
+				return !_buttons[4];
 				break;
 			case Gamepad::RTrigger:
-				return !buttons[5];
+				return !_buttons[5];
 				break;
 			case Gamepad::Select:
-				return !buttons[8];
+				return !_buttons[6];
 				break;
 			case Gamepad::Start:
-				return !buttons[9];
+				return !_buttons[7];
+				break;
+			}
+
+			float toleranceLevel = 0.3f;
+
+			//specials
+			switch (button)
+			{
+			case Gamepad::LAnalogLeft:
+				return !(LeftAnalogX() < toleranceLevel * -1.0f);
+				break;
+			case Gamepad::LAnalogRight:
+				return !(LeftAnalogX() > toleranceLevel);
+				break;
+			case Gamepad::LAnalogUp:
+				return !(LeftAnalogY() > toleranceLevel);
+				break;
+			case Gamepad::LAnalogDown:
+				return !(LeftAnalogY() < toleranceLevel * -1.0f);
+				break;
+			case Gamepad::LAnalogPushed:
+				return !_buttons[8];
+				break;
+			}
+
+			switch (button)
+			{
+			case Gamepad::RAnalogLeft:
+				return !(RightAnalogX() < toleranceLevel * -1.0f);
+				break;
+			case Gamepad::RAnalogRight:
+				return !(RightAnalogX() > toleranceLevel);
+				break;
+			case Gamepad::RAnalogUp:
+				return !(RightAnalogY() > toleranceLevel);
+				break;
+			case Gamepad::RAnalogDown:
+				return !(RightAnalogY() < toleranceLevel * -1.0f);
+				break;
+			case Gamepad::RAnalogPushed:
+				return !_buttons[9];
 				break;
 			}
 

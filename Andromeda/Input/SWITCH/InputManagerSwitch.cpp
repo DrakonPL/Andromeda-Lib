@@ -40,13 +40,18 @@ namespace Andromeda
 			hidScanInput();
 			
 			//update data for pad 1
-			//u64 kDown = hidKeysDown(CONTROLLER_P1_AUTO);
-			//u64 kUp = hidKeysUp(CONTROLLER_P1_AUTO);
-			
 			u64 kHeld = hidKeysHeld(CONTROLLER_P1_AUTO);
+			
+			//joystick
+			JoystickPosition pos_left, pos_right;
+
+			//Read the joysticks' position
+			hidJoystickRead(&pos_left, CONTROLLER_P1_AUTO, JOYSTICK_LEFT);
+			hidJoystickRead(&pos_right, CONTROLLER_P1_AUTO, JOYSTICK_RIGHT);
 			
 			//update Ggamepad device
 			_gamepad->UpdateKesy(kHeld,kHeld);
+			_gamepad->UpdateJoystick(pos_left,pos_right);
 		}
 
 		KeyboardDevice* InputManagerSwitch::GetKeyboard(int deviceNumber)

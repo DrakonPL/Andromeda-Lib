@@ -113,6 +113,7 @@ namespace Andromeda
 				Utils::Logger::Instance()->Log("Test6\n");
 			}
 
+			return 0;
 		}
 
 		unsigned int ShaderGxm::LinkShader()
@@ -320,6 +321,8 @@ namespace Andromeda
 				&blendInfo,
 				_gxmVertexProgram,
 				&_fragmentProgram);
+				
+			return 0;
 		}
 
 		void ShaderGxm::SetShaderPatcher(SceGxmShaderPatcher* shaderPatcher)

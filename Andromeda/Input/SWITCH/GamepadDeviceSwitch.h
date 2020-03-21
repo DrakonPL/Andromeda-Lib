@@ -21,19 +21,23 @@ namespace Andromeda
 			
 			u64 _kDown;
 			u64 _kUp;
+			
+			JoystickPosition _leftJoy;
+			JoystickPosition _rightJoy;
 
 		public:
 
-			int LeftAnalogX();
-			int LeftAnalogY();
+			float LeftAnalogX();
+			float LeftAnalogY();
 
-			int RightAnalogX();
-			int RightAnalogY();
+			float RightAnalogX();
+			float RightAnalogY();
 
 			bool KeyDown(Gamepad::Button button);
 			bool KeyUp(Gamepad::Button button);
 			
 			void UpdateKesy(u64 kDown,u64 kUp);
+			void UpdateJoystick(JoystickPosition left,JoystickPosition right);
 
 			friend class InputManagerSwitch;
 

@@ -22,7 +22,7 @@ namespace Andromeda
 
 		Logger::Logger()
 		{
-			_active = true;
+			_active = false;
 			_debug = false;
 
 #ifdef _DEBUG

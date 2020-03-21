@@ -1,5 +1,3 @@
-
-
 #include <Andromeda/Input/InputEnums.h>
 #include <Andromeda/Input/Vita/GamepadDeviceVita.h>
 #include <psp2/ctrl.h>
@@ -13,22 +11,23 @@ namespace Andromeda
 			_pad = pad;
 		}
 
-		int GamepadDeviceVita::LeftAnalogX()
+		float GamepadDeviceVita::LeftAnalogX()
 		{
-			return _pad->lx - 128;
+			return (_pad->lx - 128) / 128.0f;
 		}
-		int GamepadDeviceVita::LeftAnalogY()
+		float GamepadDeviceVita::LeftAnalogY()
 		{
-			return _pad->ly - 128;
+			return (_pad->ly - 128) / 128.0f;
 		}
 
-		int GamepadDeviceVita::RightAnalogX()
+		float GamepadDeviceVita::RightAnalogX()
 		{
-			return _pad->rx - 128;
+			return (_pad->rx - 128) / 128.0f;
 		}
-		int GamepadDeviceVita::RightAnalogY()
+		
+		float GamepadDeviceVita::RightAnalogY()
 		{
-			return _pad->ry - 128;
+			return (_pad->ry - 128) / 128.0f;
 		}
 
 		bool GamepadDeviceVita::KeyDown(Gamepad::Button button)
@@ -70,6 +69,41 @@ namespace Andromeda
 				break;
 			case Gamepad::Start:
 				return _pad->buttons & SCE_CTRL_START;
+				break;
+			}
+			
+			float toleranceLevel = 0.3f;
+
+			//specials
+			switch (button)
+			{
+			case Gamepad::LAnalogLeft:
+				return LeftAnalogX() < toleranceLevel * -1.0f;
+				break;
+			case Gamepad::LAnalogRight:
+				return LeftAnalogX() > toleranceLevel;
+				break;
+			case Gamepad::LAnalogUp:
+				return LeftAnalogY() > toleranceLevel;
+				break;
+			case Gamepad::LAnalogDown:
+				return LeftAnalogY() < toleranceLevel * -1.0f;
+				break;
+			}
+
+			switch (button)
+			{
+			case Gamepad::RAnalogLeft:
+				return RightAnalogX() < toleranceLevel * -1.0f;
+				break;
+			case Gamepad::RAnalogRight:
+				return RightAnalogX() > toleranceLevel;
+				break;
+			case Gamepad::RAnalogUp:
+				return RightAnalogY() > toleranceLevel;
+				break;
+			case Gamepad::RAnalogDown:
+				return RightAnalogY() < toleranceLevel * -1.0f;
 				break;
 			}
 
@@ -115,6 +149,41 @@ namespace Andromeda
 				break;
 			case Gamepad::Start:
 				return !(_pad->buttons & SCE_CTRL_START);
+				break;
+			}
+			
+			float toleranceLevel = 0.3f;
+
+			//specials
+			switch (button)
+			{
+			case Gamepad::LAnalogLeft:
+				return !(LeftAnalogX() < toleranceLevel * -1.0f);
+				break;
+			case Gamepad::LAnalogRight:
+				return !(LeftAnalogX() > toleranceLevel);
+				break;
+			case Gamepad::LAnalogUp:
+				return !(LeftAnalogY() > toleranceLevel);
+				break;
+			case Gamepad::LAnalogDown:
+				return !(LeftAnalogY() < toleranceLevel * -1.0f);
+				break;
+			}
+
+			switch (button)
+			{
+			case Gamepad::RAnalogLeft:
+				return !(RightAnalogX() < toleranceLevel * -1.0f);
+				break;
+			case Gamepad::RAnalogRight:
+				return !(RightAnalogX() > toleranceLevel);
+				break;
+			case Gamepad::RAnalogUp:
+				return !(RightAnalogY() > toleranceLevel);
+				break;
+			case Gamepad::RAnalogDown:
+				return !(RightAnalogY() < toleranceLevel * -1.0f);
 				break;
 			}
 

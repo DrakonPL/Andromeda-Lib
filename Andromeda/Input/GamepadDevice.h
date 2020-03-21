@@ -18,11 +18,11 @@ namespace Andromeda
 
 		public:
 
-			virtual int LeftAnalogX() = 0;
-			virtual int LeftAnalogY() = 0;
+			virtual float LeftAnalogX() = 0;
+			virtual float LeftAnalogY() = 0;
 
-			virtual int RightAnalogX() = 0;
-			virtual int RightAnalogY() = 0;
+			virtual float RightAnalogX() = 0;
+			virtual float RightAnalogY() = 0;
 
 			virtual bool KeyDown(Gamepad::Button button) = 0;
 			virtual bool KeyUp(Gamepad::Button button) = 0;

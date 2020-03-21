@@ -4,6 +4,8 @@
 #include <Andromeda/Input/InputManager.h>
 #include <GLFW/glfw3.h>
 
+#include "GamepadDeviceGlfw.h"
+
 namespace Andromeda
 {
 	namespace Input
@@ -13,6 +15,10 @@ namespace Andromeda
 		private:
 
 			GLFWwindow* _window;
+
+			int _padCount;
+
+			GamepadDeviceGlfw* _gamepad;
 
 		public:
 

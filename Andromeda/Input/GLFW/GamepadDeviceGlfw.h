@@ -14,17 +14,22 @@ namespace Andromeda
 		class GamepadDeviceGlfw : public GamepadDevice
 		{
 			GLFWwindow* _window;
+
 			int _padNumber;
+
+			const unsigned char* _buttons;
 
 			GamepadDeviceGlfw(GLFWwindow* window,int number);
 
+			void UpdateButtons(const unsigned char* buttons);
+
 		public:
 
-			int LeftAnalogX();
-			int LeftAnalogY();
+			float LeftAnalogX();
+			float LeftAnalogY();
 
-			int RightAnalogX();
-			int RightAnalogY();
+			float RightAnalogX();
+			float RightAnalogY();
 
 			bool KeyDown(Gamepad::Button button);
 			bool KeyUp(Gamepad::Button button);

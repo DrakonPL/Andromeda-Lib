@@ -17,39 +17,35 @@ namespace Andromeda
 			_kDown = kDown;
 			_kUp = kUp;
 		}
-
-		int GamepadDeviceSwitch::LeftAnalogX()
-		{
-			//JoystickPosition pos_left, pos_right;
-			
-			//Read the joysticks' position
-			//hidJoystickRead(&pos_left, CONTROLLER_P1_AUTO, JOYSTICK_LEFT);
-
 		
-			//pos_left.dx, pos_left.dy
-			return 0;
-		}
-		int GamepadDeviceSwitch::LeftAnalogY()
+		void GamepadDeviceSwitch::UpdateJoystick(JoystickPosition left,JoystickPosition right)
 		{
-			return 0;
+			_leftJoy = left;
+			_rightJoy = right;
 		}
 
-		int GamepadDeviceSwitch::RightAnalogX()
+		float GamepadDeviceSwitch::LeftAnalogX()
 		{
-			//pos_right.dx, pos_right.dy
-			return 0;
+			return _leftJoy.dx / 32760.0f;
 		}
-		int GamepadDeviceSwitch::RightAnalogY()
+		
+		float GamepadDeviceSwitch::LeftAnalogY()
 		{
-			return 0;
+			return _leftJoy.dy / 32760.0f;
+		}
+
+		float GamepadDeviceSwitch::RightAnalogX()
+		{
+			return _rightJoy.dx / 32760.0f;
+		}
+		
+		float GamepadDeviceSwitch::RightAnalogY()
+		{
+			return _rightJoy.dy / 32760.0f;
 		}
 
 		bool GamepadDeviceSwitch::KeyDown(Gamepad::Button button)
 		{
-			//hidKeysDown returns information about which buttons have been just pressed (and they weren't in the previous frame)
-			//_kDown = hidKeysDown(CONTROLLER_P1_AUTO);
-			//u64 kDown = hidKeysHeld(CONTROLLER_P1_AUTO);
-			
 			//check states			
 			switch(button)
 			{
@@ -89,7 +85,47 @@ namespace Andromeda
 			case Gamepad::Start:
 				return (_kDown & KEY_PLUS);
 				break;
+			}
+			
+			
+			float toleranceLevel = 0.3f;
 
+			//specials
+			switch (button)
+			{
+			case Gamepad::LAnalogLeft:
+				return LeftAnalogX() < toleranceLevel * -1.0f;
+				break;
+			case Gamepad::LAnalogRight:
+				return LeftAnalogX() > toleranceLevel;
+				break;
+			case Gamepad::LAnalogUp:
+				return LeftAnalogY() > toleranceLevel;
+				break;
+			case Gamepad::LAnalogDown:
+				return LeftAnalogY() < toleranceLevel * -1.0f;
+				break;
+			case Gamepad::LAnalogPushed:
+				return (_kDown & KEY_LSTICK);
+				break;
+			}
+
+			switch (button)
+			{
+			case Gamepad::RAnalogLeft:
+				return RightAnalogX() < toleranceLevel * -1.0f;
+				break;
+			case Gamepad::RAnalogRight:
+				return RightAnalogX() > toleranceLevel;
+				break;
+			case Gamepad::RAnalogUp:
+				return RightAnalogY() > toleranceLevel;
+				break;
+			case Gamepad::RAnalogDown:
+				return RightAnalogY() < toleranceLevel * -1.0f;
+				break;
+			case Gamepad::RAnalogPushed:
+				return (_kDown & KEY_RSTICK);
 				break;
 			}
 
@@ -98,11 +134,7 @@ namespace Andromeda
 
 		bool GamepadDeviceSwitch::KeyUp(Gamepad::Button button)
 		{
-			//hidKeysDown returns information about which buttons have been just pressed (and they weren't in the previous frame)
-			//u64 kDown = hidKeysHeld(CONTROLLER_P1_AUTO);
-			
-			//check states			
-
+			//check states
 			switch(button)
 			{
 			case Gamepad::Left: 
@@ -140,6 +172,47 @@ namespace Andromeda
 				break;
 			case Gamepad::Start:
 				return !(_kUp & KEY_PLUS);
+				break;
+			}
+			
+			float toleranceLevel = 0.3f;
+
+			//specials
+			switch (button)
+			{
+			case Gamepad::LAnalogLeft:
+				return !(LeftAnalogX() < toleranceLevel * -1.0f);
+				break;
+			case Gamepad::LAnalogRight:
+				return !(LeftAnalogX() > toleranceLevel);
+				break;
+			case Gamepad::LAnalogUp:
+				return !(LeftAnalogY() > toleranceLevel);
+				break;
+			case Gamepad::LAnalogDown:
+				return !(LeftAnalogY() < toleranceLevel * -1.0f);
+				break;
+			case Gamepad::LAnalogPushed:
+				return !(_kDown & KEY_LSTICK);
+				break;
+			}
+
+			switch (button)
+			{
+			case Gamepad::RAnalogLeft:
+				return !(RightAnalogX() < toleranceLevel * -1.0f);
+				break;
+			case Gamepad::RAnalogRight:
+				return !(RightAnalogX() > toleranceLevel);
+				break;
+			case Gamepad::RAnalogUp:
+				return !(RightAnalogY() > toleranceLevel);
+				break;
+			case Gamepad::RAnalogDown:
+				return !(RightAnalogY() < toleranceLevel * -1.0f);
+				break;
+			case Gamepad::RAnalogPushed:
+				return !(_kDown & KEY_RSTICK);
 				break;
 			}
 

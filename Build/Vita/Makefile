@@ -74,8 +74,8 @@ CC      	= $(PREFIX)-gcc
 CXX      	= $(PREFIX)-g++
 STRIP 		= $(PREFIX)-strip
 AR      	= $(PREFIX)-ar
-CXXFLAGS  	= -Wl,-q -O3 -std=gnu++11 -ffat-lto-objects -flto -fpermissive -DANDROMEDA_VITA -DHAVE_OGGVORBIS -DWANT_FASTWAV -DHAVE_LIBSPEEXDSP -DUSE_AUDIO_RESAMPLER -I../../ -I../../Libs -I../../Libs/glm -I../../Libs/freetype/include -I../../Libs/freetype_gl -I../../Libs/JellyPhysics -I../../Libs/tinyxml -I../../Libs/stb -I../../Libs/nogg -I../../Libs/tiny_obj_loader -I../../Libs/bullet/include/bullet
-CFLAGS  	= -Wl,-q -O3 -std=c99 -ffat-lto-objects -flto -DANDROMEDA_VITA -DHAVE_OGGVORBIS -DWANT_FASTWAV  -DHAVE_LIBSPEEXDSP -DUSE_AUDIO_RESAMPLER -I../../ -I../../Libs -I../../Libs/glm -I../../Libs/freetype/include -I../../Libs/freetype_gl -I../../Libs/JellyPhysics -I../../Libs/tinyxml -I../../Libs/stb -I../../Libs/nogg -I../../Libs/tiny_obj_loader -I../../Libs/bullet/include/bullet
+CXXFLAGS  	= -Wl,-q -O3 -std=gnu++11 -ffat-lto-objects -flto -Wall -Werror=return-type -fpermissive -DANDROMEDA_VITA -DHAVE_OGGVORBIS -DWANT_FASTWAV -DHAVE_LIBSPEEXDSP -DUSE_AUDIO_RESAMPLER -I../../ -I../../Libs -I../../Libs/glm -I../../Libs/freetype/include -I../../Libs/freetype_gl -I../../Libs/JellyPhysics -I../../Libs/tinyxml -I../../Libs/stb -I../../Libs/nogg -I../../Libs/tiny_obj_loader -I../../Libs/bullet/include/bullet
+CFLAGS  	= -Wl,-q -O3 -std=c99 -ffat-lto-objects -flto -Wall -Werror=return-type -DANDROMEDA_VITA -DHAVE_OGGVORBIS -DWANT_FASTWAV  -DHAVE_LIBSPEEXDSP -DUSE_AUDIO_RESAMPLER -I../../ -I../../Libs -I../../Libs/glm -I../../Libs/freetype/include -I../../Libs/freetype_gl -I../../Libs/JellyPhysics -I../../Libs/tinyxml -I../../Libs/stb -I../../Libs/nogg -I../../Libs/tiny_obj_loader -I../../Libs/bullet/include/bullet
 ASFLAGS 	= $(CFLAGS)
 
 all: $(TARGET_LIB)

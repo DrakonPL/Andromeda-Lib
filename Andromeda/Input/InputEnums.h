@@ -140,6 +140,19 @@ namespace Gamepad
 		Select,
 		Start,
 
+		//specials
+		LAnalogLeft,
+		LAnalogRight,
+		LAnalogUp,
+		LAnalogDown,
+		LAnalogPushed,
+
+		RAnalogLeft,
+		RAnalogRight,
+		RAnalogUp,
+		RAnalogDown,
+		RAnalogPushed,
+
 		Count // Keep last -- total number
 	};
 }
