@@ -529,7 +529,7 @@ namespace Andromeda
 				sceGxmReserveVertexDefaultUniformBuffer(_gxmContext, &uniform_buffer);
 			}
 			
-			sceGxmSetUniformDataF(uniform_buffer, param, 0, 16 *4, (float*)&inputArray[0]);
+			sceGxmSetUniformDataF(uniform_buffer, param, 0, 16 * arrayLength, (float*)&inputArray[0]);
 		}
 		
 		void ShaderGxm::Set(ShaderType shaderType, std::string name, std::vector<AnimMat4>& value)
