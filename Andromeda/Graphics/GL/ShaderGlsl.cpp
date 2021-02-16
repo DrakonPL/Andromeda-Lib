@@ -197,38 +197,79 @@ namespace Andromeda
 		void ShaderGlSl::SetUniform(ShaderType shaderType, std::string name, int val)
 		{
 			GLint uniformLocation = glGetUniformLocation(_shaderProgram, name.c_str());
+
+            if (uniformLocation == -1)
+            {
+				Utils::Logger::Instance()->Log("Can't find uniform : %s\n", name.c_str());
+            }
+
 			glUniform1i(uniformLocation, val);
 		}
 
 		void ShaderGlSl::SetUniform(ShaderType shaderType, std::string name, float val)
 		{
 			GLint uniformLocation = glGetUniformLocation(_shaderProgram, name.c_str());
+			if (uniformLocation == -1)
+			{
+				Utils::Logger::Instance()->Log("Can't find uniform : %s\n", name.c_str());
+			}
 			glUniform1f(uniformLocation, val);
 		}
 
 		void ShaderGlSl::SetUniform(ShaderType shaderType, std::string name, glm::vec3& val)
 		{
 			GLint uniformLocation = glGetUniformLocation(_shaderProgram, name.c_str());
+			if (uniformLocation == -1)
+			{
+				Utils::Logger::Instance()->Log("Can't find uniform : %s\n", name.c_str());
+			}
 			glProgramUniform3fv(_shaderProgram, uniformLocation, 1, glm::value_ptr(val));
 		}
 
 		void ShaderGlSl::SetUniform(ShaderType shaderType, std::string name, glm::vec4& val)
 		{
 			GLint uniformLocation = glGetUniformLocation(_shaderProgram, name.c_str());
+			if (uniformLocation == -1)
+			{
+				Utils::Logger::Instance()->Log("Can't find uniform : %s\n", name.c_str());
+			}
 			glProgramUniform4fv(_shaderProgram, uniformLocation, 1, glm::value_ptr(val));
 		}
 
 		void ShaderGlSl::SetUniform(ShaderType shaderType, std::string name, glm::mat3& val)
 		{
 			GLint uniformLocation = glGetUniformLocation(_shaderProgram, name.c_str());
+			if (uniformLocation == -1)
+			{
+				Utils::Logger::Instance()->Log("Can't find uniform : %s\n", name.c_str());
+			}
 			glUniformMatrix3fv(uniformLocation, 1, GL_FALSE, glm::value_ptr(val));
 		}
 
 		void ShaderGlSl::SetUniform(ShaderType shaderType, std::string name, glm::mat4& val)
 		{
 			GLint uniformLocation = glGetUniformLocation(_shaderProgram, name.c_str());
+			if (uniformLocation == -1)
+			{
+				Utils::Logger::Instance()->Log("Can't find uniform : %s\n", name.c_str());
+			}
 			glUniformMatrix4fv(uniformLocation, 1, GL_FALSE, glm::value_ptr(val));
 		}
-	}
+
+	    void ShaderGlSl::SetUniform(ShaderType shaderType, std::string name, AnimMat4* inputArray, unsigned int arrayLength)
+        {
+			GLint uniformLocation = glGetUniformLocation(_shaderProgram, name.c_str());
+			if (uniformLocation == -1)
+			{
+				Utils::Logger::Instance()->Log("Can't find uniform : %s\n", name.c_str());
+			}
+			glUniformMatrix4fv(uniformLocation, arrayLength, GL_FALSE, (float*)&inputArray[0]);
+        }
+
+		void ShaderGlSl::Set(ShaderType shaderType, std::string name, std::vector<AnimMat4>& value)
+		{
+			SetUniform(shaderType, name, &value[0], (unsigned int)value.size());
+		}
+    }
 }
 

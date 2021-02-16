@@ -111,14 +111,14 @@ namespace Andromeda
 			{
 				if (_sound != nullptr)
 				{
-					Mix_Volume(_soundChannel, _volume * (float)128);
+					Mix_Volume(_soundChannel, _volume * 128.0f);
 				}
 			}
 			else if (_audioType == 1)
 			{
 				if (_audio != nullptr)
 				{
-					Mix_VolumeMusic(_volume * (float)128);
+					Mix_VolumeMusic(_volume * 128.0f);
 				}
 			}
 		}
@@ -136,7 +136,7 @@ namespace Andromeda
                 {
 					int looped = _looped ? -1 : 0;
 					_soundChannel = Mix_PlayChannel(-1, _sound, looped);
-					Mix_Volume(_soundChannel, _volume * (float)128);
+					Mix_Volume(_soundChannel, _volume * 128.0f);
                 }
 			}
 			else if (_audioType == 1)
@@ -145,7 +145,7 @@ namespace Andromeda
                 {
 					int looped = _looped ? -1 : 0;
 					Mix_PlayMusic(_audio, _looped);
-					Mix_VolumeMusic(_volume * (float)128);
+					Mix_VolumeMusic(_volume * 128.0f);
                 }
 			}
 		}

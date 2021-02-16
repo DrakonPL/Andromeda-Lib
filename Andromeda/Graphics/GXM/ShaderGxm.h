@@ -52,6 +52,9 @@ namespace Andromeda
 			void SetUniform(ShaderType shaderType, std::string name, glm::vec4& val);
 			void SetUniform(ShaderType shaderType, std::string name, glm::mat3& val);
 			void SetUniform(ShaderType shaderType, std::string name, glm::mat4& val);
+
+			void SetUniform(ShaderType shaderType, std::string name, AnimMat4* inputArray, unsigned int arrayLength);
+			void Set(ShaderType shaderType, std::string name, std::vector<AnimMat4>& value);
 		};
 	}
 }

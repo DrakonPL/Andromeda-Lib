@@ -55,6 +55,15 @@ namespace Andromeda
 			float r, g, b, a;
 			float nx, ny, nz;
 		}TextureColorNormalVertex;
+
+		struct NormalTextureWeighJointVertex {
+			glm::vec3 Position;
+			glm::vec3 Normal;
+			glm::vec2 TexCoords;
+			glm::vec4 Weights;
+			unsigned short wx,wy,wz,ww;
+		};
+
 	}
 }
 

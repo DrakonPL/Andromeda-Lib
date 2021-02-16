@@ -3,10 +3,13 @@
 
 #include <Andromeda/Graphics/GraphicsEnums.h>
 #include <string>
+#include <vector>
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+
+#include "Animation/AnimMat4.h"
 
 namespace Andromeda
 {
@@ -50,6 +53,9 @@ namespace Andromeda
 			virtual void SetUniform(ShaderType shaderType, std::string name, glm::vec4 & val) = 0;
 			virtual void SetUniform(ShaderType shaderType, std::string name, glm::mat3 & val) = 0;
 			virtual void SetUniform(ShaderType shaderType, std::string name, glm::mat4 & val) = 0;
+
+			virtual void SetUniform(ShaderType shaderType, std::string name, AnimMat4* inputArray, unsigned int arrayLength) = 0;
+			virtual void Set(ShaderType shaderType, std::string name, std::vector<AnimMat4>& value) = 0;
 
 			friend class ShaderManager;
 		};

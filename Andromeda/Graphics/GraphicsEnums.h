@@ -13,7 +13,8 @@ namespace Andromeda
 			TextureNormal,
 			TextureColor,
 			ColorNormal,
-			TextureColorNormal
+			TextureColorNormal,
+			NormalTextureWeighJoint
 		};
 
 		enum VertexPrimitive

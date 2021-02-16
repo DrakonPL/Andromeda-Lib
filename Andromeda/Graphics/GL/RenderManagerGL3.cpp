@@ -194,8 +194,10 @@ namespace Andromeda
 
 		void RenderManagerGL3::ClearScreen()
 		{
-			glClearColor(clearColor[0], clearColor[1], clearColor[2], clearColor[3]);
-			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+			//glClearColor(clearColor[0], clearColor[1], clearColor[2], clearColor[3]);
+			glClearColor(0.5f, 0.6f, 0.7f, 1.0f);
+			//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 		}
 
 		void RenderManagerGL3::SetClearColor(unsigned color)
@@ -474,10 +476,13 @@ namespace Andromeda
 			case TextureColorNormal:
 				return new TextureColorVertex[size];
 				break;
+            case NormalTextureWeighJoint: 
+				return new NormalTextureWeighJointVertex[size];
+				break;
 			default: break;
 			}
 
-			return 0;
+			return nullptr;
 		}		
 
 		VertexArrayObject* RenderManagerGL3::CreateVertexArrayObject(VertexType vertexType, VertexBufferDrawType drawType)

@@ -38,6 +38,28 @@ OBJS   = 	../../Andromeda/FileSystem/FileManager.o \
 			../../Andromeda/Graphics/Models/ModelMd5.o \
 			../../Andromeda/Graphics/Models/ModelMd5Animation.o \
 			../../Andromeda/Graphics/Models/ModelMd5Utils.o \
+			../../Andromeda/Graphics/Animation\AnimatedMesh.o \
+			../../Andromeda/Graphics/Animation\AnimBaker.o \
+			../../Andromeda/Graphics/Animation\AnimMat4.o \
+			../../Andromeda/Graphics/Animation\AnimQuat.o \
+			../../Andromeda/Graphics/Animation\AnimVec3.o \
+			../../Andromeda/Graphics/Animation\Blend.o \
+			../../Andromeda/Graphics/Animation\CCDSolver.o \
+			../../Andromeda/Graphics/Animation\Clip.o \
+			../../Andromeda/Graphics/Animation\CrossFadecontroller.o \
+			../../Andromeda/Graphics/Animation\Crowd.o \
+			../../Andromeda/Graphics/Animation\DualQuaternion.o \
+			../../Andromeda/Graphics/Animation\FABRIKSolver.o \
+			../../Andromeda/Graphics/Animation\GLTFLoader.o \
+			../../Andromeda/Graphics/Animation\IKLeg.o \
+			../../Andromeda/Graphics/Animation\Intersections.o \
+			../../Andromeda/Graphics/Animation\Pose.o \
+			../../Andromeda/Graphics/Animation\RearrangeBones.o \
+			../../Andromeda/Graphics/Animation\Skeleton.o \
+			../../Andromeda/Graphics/Animation\Track.o \
+			../../Andromeda/Graphics/Animation\Transform.o \
+			../../Andromeda/Graphics/Animation\TransformTrack.o \
+			../../Andromeda/Graphics/Animation\cgltf.o \
 			../../Andromeda/Input/InputManager.o \
 			../../Andromeda/Input/Vita/InputManagerVita.o \
 			../../Andromeda/Input/Vita/GamepadDeviceVita.o \
@@ -74,8 +96,8 @@ CC      	= $(PREFIX)-gcc
 CXX      	= $(PREFIX)-g++
 STRIP 		= $(PREFIX)-strip
 AR      	= $(PREFIX)-ar
-CXXFLAGS  	= -Wl,-q -O3 -std=gnu++11 -ffat-lto-objects -flto -Wall -Werror=return-type -fpermissive -DANDROMEDA_VITA -DHAVE_OGGVORBIS -DWANT_FASTWAV -DHAVE_LIBSPEEXDSP -DUSE_AUDIO_RESAMPLER -I../../ -I../../Libs -I../../Libs/glm -I../../Libs/freetype/include -I../../Libs/freetype_gl -I../../Libs/JellyPhysics -I../../Libs/tinyxml -I../../Libs/stb -I../../Libs/nogg -I../../Libs/tiny_obj_loader -I../../Libs/bullet/include/bullet
-CFLAGS  	= -Wl,-q -O3 -std=c99 -ffat-lto-objects -flto -Wall -Werror=return-type -DANDROMEDA_VITA -DHAVE_OGGVORBIS -DWANT_FASTWAV  -DHAVE_LIBSPEEXDSP -DUSE_AUDIO_RESAMPLER -I../../ -I../../Libs -I../../Libs/glm -I../../Libs/freetype/include -I../../Libs/freetype_gl -I../../Libs/JellyPhysics -I../../Libs/tinyxml -I../../Libs/stb -I../../Libs/nogg -I../../Libs/tiny_obj_loader -I../../Libs/bullet/include/bullet
+CXXFLAGS  	= -Wl,-q -O3 -std=c++17 -ffat-lto-objects -flto -Wall  -Werror=return-type -fpermissive -DANDROMEDA_VITA -DHAVE_OGGVORBIS -DWANT_FASTWAV -DHAVE_LIBSPEEXDSP -DUSE_AUDIO_RESAMPLER -I../../ -I../../Libs -I../../Libs/glm -I../../Libs/freetype/include -I../../Libs/freetype_gl -I../../Libs/JellyPhysics -I../../Libs/tinyxml -I../../Libs/stb -I../../Libs/nogg -I../../Libs/tiny_obj_loader -I../../Libs/bullet/include/bullet
+CFLAGS  	= -Wl,-q -O3 -std=c11 -ffat-lto-objects -flto -Wall -Werror=return-type -DANDROMEDA_VITA -DHAVE_OGGVORBIS -DWANT_FASTWAV  -DHAVE_LIBSPEEXDSP -DUSE_AUDIO_RESAMPLER -I../../ -I../../Libs -I../../Libs/glm -I../../Libs/freetype/include -I../../Libs/freetype_gl -I../../Libs/JellyPhysics -I../../Libs/tinyxml -I../../Libs/stb -I../../Libs/nogg -I../../Libs/tiny_obj_loader -I../../Libs/bullet/include/bullet
 ASFLAGS 	= $(CFLAGS)
 
 all: $(TARGET_LIB)
