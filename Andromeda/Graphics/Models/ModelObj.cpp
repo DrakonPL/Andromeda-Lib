@@ -48,14 +48,14 @@ namespace Andromeda
 			}
 
 			//delete all meshaes
-			for (size_t i = 0; i < _meshes.size(); i++)
+			for (size_t i = 0; i < meshes_.size(); i++)
 			{
-				delete _meshes[i]->Mesh;
-				delete _meshes[i];
+				delete meshes_[i]->Mesh;
+				delete meshes_[i];
 			}
 
 			_materials.clear();
-			_meshes.clear();
+			meshes_.clear();
 		}
 
 		std::string ModelObj::GetFolderFromPath(std::string& fileName)
@@ -190,7 +190,7 @@ namespace Andromeda
 					modelMesh->MaterialId = 0;
 
 				//add to collection
-				_meshes.push_back(modelMesh);
+				meshes_.push_back(modelMesh);
 			}
 		}
 
@@ -444,9 +444,9 @@ namespace Andromeda
 
 		void ModelObj::Draw()
 		{
-			for (size_t i = 0; i < _meshes.size(); i++)
+			for (size_t i = 0; i < meshes_.size(); i++)
 			{
-				ModelMesh* mesh = _meshes[i];
+				ModelMesh* mesh = meshes_[i];
 				ModelMaterial* material = _materials[mesh->MaterialId];
 
 				//use texture
@@ -456,7 +456,7 @@ namespace Andromeda
 				}				
 
 				//render
-				_meshes[i]->Mesh->Draw();
+				meshes_[i]->Mesh->Draw();
 			}
 		}
 	}

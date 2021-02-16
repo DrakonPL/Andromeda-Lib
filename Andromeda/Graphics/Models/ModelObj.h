@@ -24,7 +24,7 @@ namespace Andromeda
 		private:
 
 			//meshes
-			std::vector<ModelMesh*> _meshes;
+			std::vector<ModelMesh*> meshes_;
 
 			//textures
 			std::vector<ModelMaterial*> _materials;

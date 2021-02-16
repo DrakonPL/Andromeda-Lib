@@ -118,6 +118,8 @@ namespace Andromeda
 
 		unsigned int ShaderGxm::LinkShader()
 		{
+			Utils::Logger::Instance()->Log("LinkShader - start\n");
+			
 			SceGxmVertexAttribute *vertexArrtibs;
 			SceGxmVertexStream *vertexstream;
 			int paramsCount = 0;
@@ -126,6 +128,8 @@ namespace Andromeda
 			{
 			case Andromeda::Graphics::Simple:
 			{
+				Utils::Logger::Instance()->Log("LinkShader - Simple\n");
+				
 				paramsCount = 1;
 				
 				vertexArrtibs = new SceGxmVertexAttribute[paramsCount];
@@ -148,6 +152,8 @@ namespace Andromeda
 				break;
 			case Andromeda::Graphics::Color:
 			{
+				Utils::Logger::Instance()->Log("LinkShader - Color\n");
+				
 				paramsCount = 2;
 
 				vertexArrtibs = new SceGxmVertexAttribute[paramsCount];
@@ -178,6 +184,8 @@ namespace Andromeda
 				break;
 			case Andromeda::Graphics::Textured:
 			{
+				Utils::Logger::Instance()->Log("LinkShader - Textured\n");
+				
 				paramsCount = 2;
 
 				vertexArrtibs = new SceGxmVertexAttribute[paramsCount];
@@ -207,6 +215,8 @@ namespace Andromeda
 				break;
 			case Andromeda::Graphics::TextureNormal:
 			{
+				Utils::Logger::Instance()->Log("LinkShader - TextureNormal\n");
+				
 				paramsCount = 3;
 
 				vertexArrtibs = new SceGxmVertexAttribute[paramsCount];
@@ -244,6 +254,8 @@ namespace Andromeda
 				break;
 			case Andromeda::Graphics::TextureColor:
 			{
+				Utils::Logger::Instance()->Log("LinkShader - TextureColor\n");
+				
 				paramsCount = 3;
 
 				vertexArrtibs = new SceGxmVertexAttribute[paramsCount];
@@ -268,6 +280,7 @@ namespace Andromeda
 				vertexArrtibs[1].componentCount = 3;
 				vertexArrtibs[1].regIndex = sceGxmProgramParameterGetResourceIndex(colorParam);
 
+				//textCoord
 				vertexArrtibs[2].streamIndex = 0;
 				vertexArrtibs[2].offset = 24;
 				vertexArrtibs[2].format = SCE_GXM_ATTRIBUTE_FORMAT_F32;
@@ -278,15 +291,72 @@ namespace Andromeda
 				vertexstream[0].stride = sizeof(TextureColorVertex);
 				vertexstream[0].indexSource = SCE_GXM_INDEX_SOURCE_INDEX_16BIT;
 			}
-				break;
+			break;
 			case Andromeda::Graphics::ColorNormal:
 			{
 
 			}
-				break;
+			break;
 			case Andromeda::Graphics::TextureColorNormal:
 			{
 
+			}
+			break;
+			case Andromeda::Graphics::NormalTextureWeighJoint:
+			{
+				Utils::Logger::Instance()->Log("LinkShader - NormalTextureWeighJoint\n");
+				
+				paramsCount = 5;
+
+				vertexArrtibs = new SceGxmVertexAttribute[paramsCount];
+				vertexstream = new SceGxmVertexStream[1];
+
+				//get attribute index
+				const SceGxmProgramParameter *positionParam = sceGxmProgramFindParameterByName(_gxmVertexProgram, "iPosition");
+				const SceGxmProgramParameter *normalParam = sceGxmProgramFindParameterByName(_gxmVertexProgram, "iNormal");
+				const SceGxmProgramParameter *textureParam = sceGxmProgramFindParameterByName(_gxmVertexProgram, "iTexCoord");
+				const SceGxmProgramParameter *weightParam = sceGxmProgramFindParameterByName(_gxmVertexProgram, "iWeight");
+				const SceGxmProgramParameter *jointParam = sceGxmProgramFindParameterByName(_gxmVertexProgram, "iJoint");
+
+				//position param - 12
+				vertexArrtibs[0].streamIndex = 0;
+				vertexArrtibs[0].offset = 0;
+				vertexArrtibs[0].format = SCE_GXM_ATTRIBUTE_FORMAT_F32;
+				vertexArrtibs[0].componentCount = 3;
+				vertexArrtibs[0].regIndex = sceGxmProgramParameterGetResourceIndex(positionParam);
+				
+				
+				//color param - 12
+				vertexArrtibs[1].streamIndex = 0;
+				vertexArrtibs[1].offset = 12;
+				vertexArrtibs[1].format = SCE_GXM_ATTRIBUTE_FORMAT_F32;
+				vertexArrtibs[1].componentCount = 3;
+				vertexArrtibs[1].regIndex = sceGxmProgramParameterGetResourceIndex(normalParam);
+
+				//textCoord - 8
+				vertexArrtibs[2].streamIndex = 0;
+				vertexArrtibs[2].offset = 24;
+				vertexArrtibs[2].format = SCE_GXM_ATTRIBUTE_FORMAT_F32;
+				vertexArrtibs[2].componentCount = 2;
+				vertexArrtibs[2].regIndex = sceGxmProgramParameterGetResourceIndex(textureParam);
+				
+				//weight - 16
+				vertexArrtibs[3].streamIndex = 0;
+				vertexArrtibs[3].offset = 32;
+				vertexArrtibs[3].format = SCE_GXM_ATTRIBUTE_FORMAT_F32;
+				vertexArrtibs[3].componentCount = 4;
+				vertexArrtibs[3].regIndex = sceGxmProgramParameterGetResourceIndex(weightParam);
+				
+				//joint - 16
+				vertexArrtibs[4].streamIndex = 0;
+				vertexArrtibs[4].offset = 48;
+				vertexArrtibs[4].format = SCE_GXM_ATTRIBUTE_FORMAT_U16;
+				vertexArrtibs[4].componentCount = 4;
+				vertexArrtibs[4].regIndex = sceGxmProgramParameterGetResourceIndex(jointParam);
+
+
+				vertexstream[0].stride = sizeof(NormalTextureWeighJointVertex);
+				vertexstream[0].indexSource = SCE_GXM_INDEX_SOURCE_INDEX_16BIT;
 			}
 				break;
 			default:
@@ -321,6 +391,8 @@ namespace Andromeda
 				&blendInfo,
 				_gxmVertexProgram,
 				&_fragmentProgram);
+				
+			Utils::Logger::Instance()->Log("LinkShader - end\n");
 				
 			return 0;
 		}
@@ -439,6 +511,30 @@ namespace Andromeda
 			}
 
 			sceGxmSetUniformDataF(uniform_buffer, param, 0, 16, glm::value_ptr(val));
+		}
+		
+		void ShaderGxm::SetUniform(ShaderType shaderType, std::string name, AnimMat4* inputArray, unsigned int arrayLength)
+		{
+			void *uniform_buffer;
+			const SceGxmProgramParameter* param;
+			
+			if (shaderType == FragmentShader)
+			{
+				param = GetUniform(_fragmentProgramId, name);
+				sceGxmReserveFragmentDefaultUniformBuffer(_gxmContext, &uniform_buffer);
+			}
+			else
+			{
+				param = GetUniform(_vertexProgramId, name);
+				sceGxmReserveVertexDefaultUniformBuffer(_gxmContext, &uniform_buffer);
+			}
+			
+			sceGxmSetUniformDataF(uniform_buffer, param, 0, 16 *4, (float*)&inputArray[0]);
+		}
+		
+		void ShaderGxm::Set(ShaderType shaderType, std::string name, std::vector<AnimMat4>& value)
+		{
+			SetUniform(shaderType, name, &value[0], (unsigned int)value.size());
 		}
 
 		const SceGxmProgramParameter * ShaderGxm::GetUniform(SceGxmShaderPatcherId programId, std::string paramName)

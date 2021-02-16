@@ -67,6 +67,9 @@
     <Filter Include="Andromeda\Audio\Sdl">
       <UniqueIdentifier>{7880f6e1-b55a-40c5-bf2a-cb3b7c0badd1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Andromeda\Graphics\Animation">
+      <UniqueIdentifier>{ed5355e7-77a3-4b04-9848-a827d5da7dec}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Andromeda\System\GameManager.cpp">
@@ -281,6 +284,72 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Andromeda\Audio\Sdl\SdlSound.cpp">
       <Filter>Andromeda\Audio\Sdl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Andromeda\Graphics\Animation\AnimBaker.cpp">
+      <Filter>Andromeda\Graphics\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Andromeda\Graphics\Animation\AnimQuat.cpp">
+      <Filter>Andromeda\Graphics\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Andromeda\Graphics\Animation\AnimVec3.cpp">
+      <Filter>Andromeda\Graphics\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Andromeda\Graphics\Animation\Blend.cpp">
+      <Filter>Andromeda\Graphics\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Andromeda\Graphics\Animation\CCDSolver.cpp">
+      <Filter>Andromeda\Graphics\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Andromeda\Graphics\Animation\cgltf.c">
+      <Filter>Andromeda\Graphics\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Andromeda\Graphics\Animation\Clip.cpp">
+      <Filter>Andromeda\Graphics\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Andromeda\Graphics\Animation\CrossFadecontroller.cpp">
+      <Filter>Andromeda\Graphics\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Andromeda\Graphics\Animation\Crowd.cpp">
+      <Filter>Andromeda\Graphics\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Andromeda\Graphics\Animation\DualQuaternion.cpp">
+      <Filter>Andromeda\Graphics\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Andromeda\Graphics\Animation\FABRIKSolver.cpp">
+      <Filter>Andromeda\Graphics\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Andromeda\Graphics\Animation\GLTFLoader.cpp">
+      <Filter>Andromeda\Graphics\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Andromeda\Graphics\Animation\IKLeg.cpp">
+      <Filter>Andromeda\Graphics\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Andromeda\Graphics\Animation\Intersections.cpp">
+      <Filter>Andromeda\Graphics\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Andromeda\Graphics\Animation\Pose.cpp">
+      <Filter>Andromeda\Graphics\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Andromeda\Graphics\Animation\RearrangeBones.cpp">
+      <Filter>Andromeda\Graphics\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Andromeda\Graphics\Animation\Skeleton.cpp">
+      <Filter>Andromeda\Graphics\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Andromeda\Graphics\Animation\Track.cpp">
+      <Filter>Andromeda\Graphics\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Andromeda\Graphics\Animation\Transform.cpp">
+      <Filter>Andromeda\Graphics\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Andromeda\Graphics\Animation\TransformTrack.cpp">
+      <Filter>Andromeda\Graphics\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Andromeda\Graphics\Animation\AnimatedMesh.cpp">
+      <Filter>Andromeda\Graphics\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Andromeda\Graphics\Animation\AnimMat4.cpp">
+      <Filter>Andromeda\Graphics\Animation</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -538,6 +607,96 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Andromeda\Audio\Sdl\SdlSound.h">
       <Filter>Andromeda\Audio\Sdl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Andromeda\Graphics\Animation\AnimBaker.h">
+      <Filter>Andromeda\Graphics\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Andromeda\Graphics\Animation\AnimMat4.h">
+      <Filter>Andromeda\Graphics\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Andromeda\Graphics\Animation\AnimQuat.h">
+      <Filter>Andromeda\Graphics\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Andromeda\Graphics\Animation\AnimVec2.h">
+      <Filter>Andromeda\Graphics\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Andromeda\Graphics\Animation\AnimVec3.h">
+      <Filter>Andromeda\Graphics\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Andromeda\Graphics\Animation\AnimVec4.h">
+      <Filter>Andromeda\Graphics\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Andromeda\Graphics\Animation\Blending.h">
+      <Filter>Andromeda\Graphics\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Andromeda\Graphics\Animation\CCDSolver.h">
+      <Filter>Andromeda\Graphics\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Andromeda\Graphics\Animation\cgltf.h">
+      <Filter>Andromeda\Graphics\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Andromeda\Graphics\Animation\Clip.h">
+      <Filter>Andromeda\Graphics\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Andromeda\Graphics\Animation\CrossFadeController.h">
+      <Filter>Andromeda\Graphics\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Andromeda\Graphics\Animation\CrossFadeTarget.h">
+      <Filter>Andromeda\Graphics\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Andromeda\Graphics\Animation\Crowd.h">
+      <Filter>Andromeda\Graphics\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Andromeda\Graphics\Animation\DualQuaternion.h">
+      <Filter>Andromeda\Graphics\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Andromeda\Graphics\Animation\FABRIKSolver.h">
+      <Filter>Andromeda\Graphics\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Andromeda\Graphics\Animation\Frame.h">
+      <Filter>Andromeda\Graphics\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Andromeda\Graphics\Animation\GLTFLoader.h">
+      <Filter>Andromeda\Graphics\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Andromeda\Graphics\Animation\IKLeg.h">
+      <Filter>Andromeda\Graphics\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Andromeda\Graphics\Animation\Interpolation.h">
+      <Filter>Andromeda\Graphics\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Andromeda\Graphics\Animation\Intersections.h">
+      <Filter>Andromeda\Graphics\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Andromeda\Graphics\Animation\khrplatform.h">
+      <Filter>Andromeda\Graphics\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Andromeda\Graphics\Animation\Pose.h">
+      <Filter>Andromeda\Graphics\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Andromeda\Graphics\Animation\RearrangeBones.h">
+      <Filter>Andromeda\Graphics\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Andromeda\Graphics\Animation\SamplePoseInstance.h">
+      <Filter>Andromeda\Graphics\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Andromeda\Graphics\Animation\Skeleton.h">
+      <Filter>Andromeda\Graphics\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Andromeda\Graphics\Animation\SkinningType.h">
+      <Filter>Andromeda\Graphics\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Andromeda\Graphics\Animation\Track.h">
+      <Filter>Andromeda\Graphics\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Andromeda\Graphics\Animation\Transform.h">
+      <Filter>Andromeda\Graphics\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Andromeda\Graphics\Animation\TransformTrack.h">
+      <Filter>Andromeda\Graphics\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Andromeda\Graphics\Animation\AnimatedMesh.h">
+      <Filter>Andromeda\Graphics\Animation</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

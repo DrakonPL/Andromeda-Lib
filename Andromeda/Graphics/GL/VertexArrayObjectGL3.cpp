@@ -270,7 +270,31 @@ namespace Andromeda
 				break;
 				case ColorNormal: break;
 				case TextureColorNormal: break;
-				default: break;
+                case NormalTextureWeighJoint:
+                {
+					//position attribute
+					glEnableVertexAttribArray(0);
+					glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, _vertexSize, (GLvoid*)0);					
+
+					//normal attribute
+					glEnableVertexAttribArray(1);
+					glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, _vertexSize, (GLvoid*)(offsetof(NormalTextureWeighJointVertex, Normal)));
+
+					//texture attribute
+					glEnableVertexAttribArray(2);
+					glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, _vertexSize, (GLvoid*)(offsetof(NormalTextureWeighJointVertex, TexCoords)));
+
+					//weights attribute
+					glEnableVertexAttribArray(3);
+					glVertexAttribPointer(3, 4, GL_FLOAT, GL_FALSE, _vertexSize, (GLvoid*)(offsetof(NormalTextureWeighJointVertex, Weights)));
+
+					//joints attribute
+					glEnableVertexAttribArray(4);
+					glVertexAttribIPointer(4, 4, GL_UNSIGNED_SHORT, _vertexSize, (GLvoid*)(offsetof(NormalTextureWeighJointVertex, wx)));
+					//glVertexAttribPointer(4, 4, GL_FLOAT, GL_FALSE, _vertexSize, (GLvoid*)(offsetof(NormalTextureWeighJointVertex, Joints)));
+
+                }					
+				break;
 			}
 		}
 
