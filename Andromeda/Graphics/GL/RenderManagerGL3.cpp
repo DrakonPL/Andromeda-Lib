@@ -476,6 +476,9 @@ namespace Andromeda
 			case TextureColorNormal:
 				return new TextureColorVertex[size];
 				break;
+			case NormalColorWeighJoint:
+				return new NormalColorWeighJointVertex[size];
+				break;
             case NormalTextureWeighJoint: 
 				return new NormalTextureWeighJointVertex[size];
 				break;

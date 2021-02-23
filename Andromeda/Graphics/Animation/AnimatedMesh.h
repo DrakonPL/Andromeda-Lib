@@ -5,12 +5,14 @@
 
 #include <Andromeda/Graphics/RenderManager.h>
 #include <Andromeda/Graphics/GraphicsEnums.h>
+#include <Andromeda/Graphics/Models/ModelMaterial.h>
 
 #include <vector>
 
 #include "Pose.h"
 #include "Skeleton.h"
 #include "SkinningType.h"
+
 
 namespace Andromeda
 {
@@ -24,8 +26,10 @@ namespace Andromeda
 			VertexArrayObject* mesh_ = nullptr;
 
 			int MaterialId;
+			ModelMaterial* material_ = nullptr;
 
 			SkinningType mSkinType_;
+			bool _colorMesh;
 
 		protected:
 			std::vector<glm::vec3> position_;
@@ -50,12 +54,15 @@ namespace Andromeda
 			std::vector<glm::ivec4>& GetJoints();
 			std::vector<unsigned int>& GetIndices();
 
+			void Setmaterial(ModelMaterial* material);
+			ModelMaterial* GetMaterial();
+
 			void CPUSkin(Skeleton& skeleton, Pose& pose);
 			void CPUSkin(std::vector<AnimMat4>& animated);
 
 			void UpdateSkinning();
 
-			void CreateMesh(SkinningType mSkinType);
+			void CreateMesh(SkinningType mSkinType,bool colorMesh = false);
 			void Draw();
 
 

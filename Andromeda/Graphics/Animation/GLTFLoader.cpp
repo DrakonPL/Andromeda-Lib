@@ -2,6 +2,7 @@
 #include <iostream>
 
 #include "Andromeda/Utils/Logger.h"
+#include <Libs/stb/stb_image.h>
 
 namespace GLTFHelpers {
 	void GetScalarValues(std::vector<float>& outScalars, unsigned int inComponentCount, const cgltf_accessor& inAccessor) {
@@ -138,6 +139,11 @@ namespace GLTFHelpers {
 			    case cgltf_attribute_type_position:
 				    positions.push_back(glm::vec3(values[index + 0], values[index + 1], values[index + 2]));
 				break;
+				case cgltf_attribute_type_color:
+				{
+					AnimVec3 normal = AnimVec3(values[index + 0], values[index + 1], values[index + 2]);
+				}
+					break;
 			    case cgltf_attribute_type_normal:
 			    {
 				    AnimVec3 normal = AnimVec3(values[index + 0], values[index + 1], values[index + 2]);
@@ -398,9 +404,64 @@ std::vector<Andromeda::Graphics::AnimatedMesh> LoadAnimationMeshes(cgltf_data* d
 				}
 			}
 
+			//material
+			if (primitive->material != nullptr)
+			{
+				Andromeda::Graphics::ModelMaterial* meshMaterial = new Andromeda::Graphics::ModelMaterial();
+
+				meshMaterial->Name = std::string(primitive->material->name);
+
+				if (primitive->material->has_pbr_metallic_roughness)
+				{
+					meshMaterial->SetColor(Andromeda::Graphics::MaterialColorType::MaterialColorDiffuse, glm::vec3(primitive->material->pbr_metallic_roughness.base_color_factor[0], primitive->material->pbr_metallic_roughness.base_color_factor[1], primitive->material->pbr_metallic_roughness.base_color_factor[2]));
+				}
+
+				//texture test
+				if (primitive->material->pbr_metallic_roughness.base_color_texture.texture != nullptr)
+				{
+					/*const cgltf_texture* srcTexture = primitive->material->pbr_metallic_roughness.base_color_texture.texture;
+					const cgltf_buffer_view* bv = srcTexture->image->buffer_view;
+					const char* uri = srcTexture->image->uri;
+					const uint32_t totalSize = uint32_t(bv ? bv->size : 0);
+					void** data = bv ? &bv->buffer->data : nullptr;
+					const size_t offset = bv ? bv->offset : 0;
+
+
+					if(data) {
+						const uint8_t* sourceData = offset + (const uint8_t*)*data;
+
+						int width = 0;
+						int height = 0;
+						int numComponents = 0;
+
+						if (!stbi_info_from_memory(sourceData, totalSize, &width, &height,&numComponents)) {
+							return result;
+						}
+
+						stbi_load_from_memory(sourceData, totalSize, &width, &height, &numComponents, 4);
+					}*/
+
+				}
+
+				mesh.Setmaterial(meshMaterial);
+			}
 			//mesh.UpdateMesh();
 		}
 	}
+
+	return result;
+}
+
+std::vector<Andromeda::Graphics::ModelMaterial> LoadMaterials(cgltf_data* data)
+{
+	std::vector<Andromeda::Graphics::ModelMaterial> result;
+
+	//for (size_t i = 0; i < data->materials_count; i++)
+	//{
+	//	result.push_back(Andromeda::Graphics::ModelMaterial());
+	//	Andromeda::Graphics::ModelMaterial& material = result[result.size() - 1];
+	//}
+
 
 	return result;
 }

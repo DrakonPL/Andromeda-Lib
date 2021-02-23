@@ -24,10 +24,16 @@ namespace Andromeda
 			std::string _specularTexture;
 			std::string _bumpTexture;
 
+			bool _haveColor;
+			bool _haveTexture;
+
 		public:
 
 			ModelMaterial();
 			~ModelMaterial();
+
+			bool HaveColor();
+			bool HaveTexture();
 
 			void SetColor(MaterialColorType type, glm::vec3 color);
 			void SetTextureName(MaterialTextureType type, std::string fileName);

@@ -16,12 +16,25 @@ namespace Andromeda
 			_specularTexture = "";
 			_bumpTexture = "";
 
+			_haveColor = false;
+			_haveTexture = false;
+
 			Image = nullptr;
 		}
 
 		ModelMaterial::~ModelMaterial()
 		{
 
+		}
+
+		bool ModelMaterial::HaveColor()
+		{
+			return _haveColor;
+		}
+
+		bool ModelMaterial::HaveTexture()
+		{
+			return _haveTexture;
 		}
 
 		void ModelMaterial::SetColor(MaterialColorType type, glm::vec3 color)
@@ -33,6 +46,7 @@ namespace Andromeda
 				break;
 			case MaterialColorDiffuse:
 				_diffuseColor = color;
+				_haveColor = true;
 				break;
 			case MaterialColorSpecular:
 				_specularColor = color;
@@ -49,6 +63,7 @@ namespace Andromeda
 				break;
 			case MaterialTextureSpecular:
 				_specularTexture = fileName;
+				_haveTexture = true;
 				break;
 			case MaterialTextureBump:
 				_bumpTexture = fileName;

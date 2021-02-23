@@ -7,4 +7,6 @@ enum class SkinningType {
 	GPU
 };
 
+
+
 #endif // !_H_SKINNINGTYPE_

@@ -38,7 +38,7 @@ namespace Andromeda
 			return indices_;
 		}
 
-		void AnimatedMesh::CreateMesh(SkinningType mSkinType)
+		void AnimatedMesh::CreateMesh(SkinningType mSkinType, bool colorMesh)
 		{
             if (mesh_ != nullptr)
             {
@@ -46,6 +46,7 @@ namespace Andromeda
             }
 
 			mSkinType_ = mSkinType;
+			_colorMesh = colorMesh;
 
 			if(mSkinType_ == SkinningType::GPU)
 			    mesh_ = RenderManager::Instance()->CreateVertexArrayObject(NormalTextureWeighJoint, DynamicDraw);
@@ -124,6 +125,7 @@ namespace Andromeda
 
             if (mSkinType_ == SkinningType::GPU)
             {
+				//NormalTextureWeighJointVertex
 				NormalTextureWeighJointVertex* _simpleData = static_cast<NormalTextureWeighJointVertex*>(mesh_->GetVertices());
 
 				for (size_t v = 0; v < position_.size(); v++)
@@ -142,6 +144,7 @@ namespace Andromeda
 				mesh_->UpdateVertices(_simpleData, position_.size(), false);
             }else
             {
+				//ColorNormalVertex
 				TextureNormalVertex* _simpleData = static_cast<TextureNormalVertex*>(mesh_->GetVertices());
 
 				for (size_t v = 0; v < position_.size(); v++)
@@ -160,6 +163,17 @@ namespace Andromeda
 
 				mesh_->UpdateVertices(_simpleData, position_.size(), false);
             }			
+		}
+
+
+		void AnimatedMesh::Setmaterial(ModelMaterial* material)
+		{
+			material_ = material;
+		}
+
+		ModelMaterial* AnimatedMesh::GetMaterial()
+		{
+			return material_;
 		}
 
 		void AnimatedMesh::CPUSkin(Skeleton& skeleton, Pose& pose)

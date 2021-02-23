@@ -14,6 +14,7 @@ namespace Andromeda
 			TextureColor,
 			ColorNormal,
 			TextureColorNormal,
+			NormalColorWeighJoint,
 			NormalTextureWeighJoint
 		};
 

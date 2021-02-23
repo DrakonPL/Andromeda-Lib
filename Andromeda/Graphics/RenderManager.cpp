@@ -83,6 +83,9 @@ namespace Andromeda
 			case TextureColorNormal:
 				return sizeof(TextureColorNormalVertex);
 				break;
+			case NormalColorWeighJoint:
+				return sizeof(NormalColorWeighJointVertex);
+				break;
             case NormalTextureWeighJoint: 
 				return sizeof(NormalTextureWeighJointVertex);
 				break;
