@@ -56,6 +56,8 @@ namespace Andromeda
 			void ProcessMouseMovement(float xoffset, float yoffset, bool constrainPitch);
 			void ProcessMouseScroll(float yoffset);
 
+			//
+
 			void UpdateCameraVectors();
 		};
 	}

@@ -127,7 +127,7 @@ namespace GLTFHelpers {
 
 		std::vector<glm::vec3>& positions = outMesh.GetPositions();
 		std::vector<glm::vec3>& normals = outMesh.GetNormals();
-		std::vector<glm::vec2> & textCoords = outMesh.GetTextCoords();
+		std::vector<glm::vec2>& textCoords = outMesh.GetTextCoords();
 		std::vector<glm::vec4>& weights = outMesh.GetWeights();
 		std::vector<glm::ivec4>& joints = outMesh.GetJoints();
 
@@ -378,6 +378,91 @@ std::vector<Andromeda::Graphics::AnimatedMesh> LoadAnimationMeshes(cgltf_data* d
 	for (unsigned int i = 0; i < nodeCount; ++i) {
 		cgltf_node* node = &nodes[i];
 		if (node->mesh == 0 || node->skin == 0) {
+			continue;
+		}
+
+		unsigned int numPrims = (unsigned int)node->mesh->primitives_count;
+		for (unsigned int j = 0; j < numPrims; ++j) {
+			result.push_back(Andromeda::Graphics::AnimatedMesh());
+			Andromeda::Graphics::AnimatedMesh& mesh = result[result.size() - 1];
+
+			cgltf_primitive* primitive = &node->mesh->primitives[j];
+
+			unsigned int numAttributes = (unsigned int)primitive->attributes_count;
+			for (unsigned int k = 0; k < numAttributes; ++k) {
+				cgltf_attribute* attribute = &primitive->attributes[k];
+				GLTFHelpers::MeshFromAttribute(mesh, *attribute, node->skin, nodes, nodeCount);
+			}
+
+			if (primitive->indices != 0) {
+				unsigned int indexCount = (unsigned int)primitive->indices->count;
+				std::vector<unsigned int>& indices = mesh.GetIndices();
+				indices.resize(indexCount);
+
+				for (unsigned int k = 0; k < indexCount; ++k) {
+					indices[k] = (unsigned int)cgltf_accessor_read_index(primitive->indices, k);
+				}
+			}
+
+			//material
+			if (primitive->material != nullptr)
+			{
+				Andromeda::Graphics::ModelMaterial* meshMaterial = new Andromeda::Graphics::ModelMaterial();
+
+				meshMaterial->Name = std::string(primitive->material->name);
+
+				if (primitive->material->has_pbr_metallic_roughness)
+				{
+					meshMaterial->SetColor(Andromeda::Graphics::MaterialColorType::MaterialColorDiffuse, glm::vec3(primitive->material->pbr_metallic_roughness.base_color_factor[0], primitive->material->pbr_metallic_roughness.base_color_factor[1], primitive->material->pbr_metallic_roughness.base_color_factor[2]));
+				}
+
+				//texture test
+				if (primitive->material->pbr_metallic_roughness.base_color_texture.texture != nullptr)
+				{
+					/*const cgltf_texture* srcTexture = primitive->material->pbr_metallic_roughness.base_color_texture.texture;
+					const cgltf_buffer_view* bv = srcTexture->image->buffer_view;
+					const char* uri = srcTexture->image->uri;
+					const uint32_t totalSize = uint32_t(bv ? bv->size : 0);
+					void** data = bv ? &bv->buffer->data : nullptr;
+					const size_t offset = bv ? bv->offset : 0;
+
+
+					if(data) {
+						const uint8_t* sourceData = offset + (const uint8_t*)*data;
+
+						int width = 0;
+						int height = 0;
+						int numComponents = 0;
+
+						if (!stbi_info_from_memory(sourceData, totalSize, &width, &height,&numComponents)) {
+							return result;
+						}
+
+						stbi_load_from_memory(sourceData, totalSize, &width, &height, &numComponents, 4);
+					}*/
+
+				}
+
+				mesh.Setmaterial(meshMaterial);
+			}
+			//mesh.UpdateMesh();
+		}
+	}
+
+	return result;
+}
+
+std::vector<Andromeda::Graphics::AnimatedMesh> LoadStaticMeshes(cgltf_data* data)
+{
+	std::vector<Andromeda::Graphics::AnimatedMesh> result;
+
+	//code
+	cgltf_node* nodes = data->nodes;
+	unsigned int nodeCount = (unsigned int)data->nodes_count;
+
+	for (unsigned int i = 0; i < nodeCount; ++i) {
+		cgltf_node* node = &nodes[i];
+		if (node->mesh == 0) {
 			continue;
 		}
 

@@ -133,6 +133,7 @@
     <ClCompile Include="..\..\..\Andromeda\Graphics\GL\RenderManagerGL3.cpp" />
     <ClCompile Include="..\..\..\Andromeda\Graphics\GL\VertexArrayObjectGL3.cpp" />
     <ClCompile Include="..\..\..\Andromeda\Graphics\GL\VertexBufferObjectGL3.cpp" />
+    <ClCompile Include="..\..\..\Andromeda\Graphics\Models\AnimatedModel.cpp" />
     <ClCompile Include="..\..\..\Andromeda\Graphics\Models\ModelMaterial.cpp" />
     <ClCompile Include="..\..\..\Andromeda\Graphics\Models\ModelMd5.cpp" />
     <ClCompile Include="..\..\..\Andromeda\Graphics\Models\ModelMd5Animation.cpp" />
@@ -223,7 +224,6 @@
     <ClInclude Include="..\..\..\Andromeda\Graphics\Animation\khrplatform.h" />
     <ClInclude Include="..\..\..\Andromeda\Graphics\Animation\Pose.h" />
     <ClInclude Include="..\..\..\Andromeda\Graphics\Animation\RearrangeBones.h" />
-    <ClInclude Include="..\..\..\Andromeda\Graphics\Animation\SamplePoseInstance.h" />
     <ClInclude Include="..\..\..\Andromeda\Graphics\Animation\Skeleton.h" />
     <ClInclude Include="..\..\..\Andromeda\Graphics\Animation\SkinningType.h" />
     <ClInclude Include="..\..\..\Andromeda\Graphics\Animation\Track.h" />
@@ -237,6 +237,7 @@
     <ClInclude Include="..\..\..\Andromeda\Graphics\GL\VertexArrayObjectGL3.h" />
     <ClInclude Include="..\..\..\Andromeda\Graphics\GL\VertexBufferObjectGL3.h" />
     <ClInclude Include="..\..\..\Andromeda\Graphics\GraphicsEnums.h" />
+    <ClInclude Include="..\..\..\Andromeda\Graphics\Models\AnimatedModel.h" />
     <ClInclude Include="..\..\..\Andromeda\Graphics\Models\ModelMaterial.h" />
     <ClInclude Include="..\..\..\Andromeda\Graphics\Models\ModelMd5.h" />
     <ClInclude Include="..\..\..\Andromeda\Graphics\Models\ModelMd5Animation.h" />

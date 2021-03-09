@@ -21,6 +21,7 @@ Skeleton LoadSkeleton(cgltf_data* data);
 std::vector<Clip> LoadAnimationClips(cgltf_data* data);
 
 std::vector<Andromeda::Graphics::AnimatedMesh> LoadAnimationMeshes(cgltf_data* data);//ModelMaterial
+std::vector<Andromeda::Graphics::AnimatedMesh> LoadStaticMeshes(cgltf_data* data);//ModelMaterial
 std::vector<Andromeda::Graphics::ModelMaterial> LoadMaterials(cgltf_data* data);
 
 void FreeGLTFFile(cgltf_data* handle);

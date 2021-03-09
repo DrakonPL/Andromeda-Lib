@@ -351,6 +351,9 @@
     <ClCompile Include="..\..\..\Andromeda\Graphics\Animation\AnimMat4.cpp">
       <Filter>Andromeda\Graphics\Animation</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Andromeda\Graphics\Models\AnimatedModel.cpp">
+      <Filter>Andromeda\Graphics\Models</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Andromeda\System\GameManager.h">
@@ -677,9 +680,6 @@
     <ClInclude Include="..\..\..\Andromeda\Graphics\Animation\RearrangeBones.h">
       <Filter>Andromeda\Graphics\Animation</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Andromeda\Graphics\Animation\SamplePoseInstance.h">
-      <Filter>Andromeda\Graphics\Animation</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Andromeda\Graphics\Animation\Skeleton.h">
       <Filter>Andromeda\Graphics\Animation</Filter>
     </ClInclude>
@@ -697,6 +697,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Andromeda\Graphics\Animation\AnimatedMesh.h">
       <Filter>Andromeda\Graphics\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Andromeda\Graphics\Models\AnimatedModel.h">
+      <Filter>Andromeda\Graphics\Models</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -39,12 +39,14 @@ namespace Andromeda
 			std::vector<glm::ivec4> joints_;
 			std::vector<unsigned int> indices_;
 
-		protected:
 			std::vector<glm::vec3> mSkinnedPosition;
 			std::vector<glm::vec3> mSkinnedNormal;
 			std::vector<AnimMat4> mPosePalette;
 
 		public:
+
+			AnimatedMesh();
+			~AnimatedMesh();
 
 
 			std::vector<glm::vec3>& GetPositions();

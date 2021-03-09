@@ -4,6 +4,7 @@
 enum class SkinningType {
 	None,
 	CPU,
+	CPUGPU,
 	GPU
 };
 

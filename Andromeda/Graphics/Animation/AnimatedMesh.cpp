@@ -8,6 +8,25 @@ namespace Andromeda
 {
 	namespace Graphics
 	{
+		AnimatedMesh::AnimatedMesh()
+		{
+			 mesh_ = nullptr;
+			 material_ = nullptr;
+		}
+
+		AnimatedMesh::~AnimatedMesh()
+		{
+			/*if (mesh_ != nullptr)
+			{
+				delete mesh_;
+			}
+
+			if (material_ != nullptr)
+			{
+				delete material_;
+			}*/
+		}
+
 		std::vector<glm::vec3>& AnimatedMesh::GetPositions()
 		{
 			return position_;
