@@ -10,13 +10,13 @@ namespace Andromeda
 	{
 		AnimatedModel::AnimatedModel()
 		{
-			mSkinType = SkinningType::None;
+			_skinningType = SkinningType::None;
 		}
 
 		AnimatedModel::~AnimatedModel()
 		{
 			_meshes.clear();
-			mClips.clear();
+			_clips.clear();
 		}		
 
 		void AnimatedModel::LoadAnimatedModel(std::string modelFile)
@@ -27,23 +27,37 @@ namespace Andromeda
 			if (gltf)
 			{
 				_meshes = LoadAnimationMeshes(gltf);
-				mSkeleton = LoadSkeleton(gltf);
-				mClips = LoadAnimationClips(gltf);
+				_skeleton = LoadSkeleton(gltf);
+				_clips = LoadAnimationClips(gltf);
 				FreeGLTFFile(gltf);
 
-				BoneMap bones = RearrangeSkeleton(mSkeleton);
+				BoneMap bones = RearrangeSkeleton(_skeleton);
 				for (unsigned int i = 0, size = (unsigned int)_meshes.size(); i < size; ++i) {
 					RearrangeMesh(_meshes[i], bones);
 				}
-				for (unsigned int i = 0, size = (unsigned int)mClips.size(); i < size; ++i) {
-					RearrangeClip(mClips[i], bones);
+				for (unsigned int i = 0, size = (unsigned int)_clips.size(); i < size; ++i) {
+					RearrangeClip(_clips[i], bones);
 				}
 
 				//update meshes
 				for (unsigned int i = 0, size = (unsigned int)_meshes.size(); i < size; ++i)
 				{
-					_meshes[i].CreateMesh(mSkinType);
+					_meshes[i].CreateMesh(_skinningType);
 				}
+
+				_currentClip = 0;
+				_currentPose = _skeleton.GetRestPose();
+
+				_clipsCount = _clips.size();
+
+				for (unsigned int i = 0; i < _clipsCount ;++i)
+				{
+					_clipNames.push_back(_clips[i].GetName());
+				}
+
+
+				_crossController.SetSkeleton(_skeleton);
+				//_crossController.Play(&_clips[_currentClip]);
 			}			
 		}
 
@@ -72,7 +86,7 @@ namespace Andromeda
 
 		void AnimatedModel::SetSkinningType(SkinningType skinning)
 		{
-			mSkinType = skinning;
+			_skinningType = skinning;
 		}
 
 		void AnimatedModel::SetShader(Shader* shader)
@@ -80,39 +94,160 @@ namespace Andromeda
 			_shader = shader;
 		}
 
+		Shader* AnimatedModel::GetShader()
+		{
+			return _shader;
+		}
+
+		//transformations
+		void AnimatedModel::SetPosition(glm::vec3 position)
+		{
+			_position = position;
+		}
+
+		void AnimatedModel::SetRotation(glm::vec3 rotation)
+		{
+			_rotation = rotation;
+		}
+
+		void AnimatedModel::SetScale(glm::vec3 scale)
+		{
+			_scale = scale;
+		}
+
+		glm::vec3 AnimatedModel::GetPosition()
+		{
+			return _position;
+		}
+
+		glm::vec3 AnimatedModel::GetRotation()
+		{
+			return _rotation;
+		}
+
+		glm::vec3 AnimatedModel::GetScale()
+		{
+			return _scale;
+		}
+
+		glm::mat4 AnimatedModel::GetModelMatrix()
+		{
+			_modelMatrix = glm::mat4(1.0);
+
+			//translation
+			_modelMatrix = glm::translate(_modelMatrix, _position);
+
+			//rotate
+			_modelMatrix = glm::rotate(_modelMatrix, _rotation.x, glm::vec3(1.0f, 0.0f, 0.0f));
+			_modelMatrix = glm::rotate(_modelMatrix, _rotation.y, glm::vec3(0.0f, 1.0f, 0.0f));
+			_modelMatrix = glm::rotate(_modelMatrix, _rotation.z, glm::vec3(0.0f, 0.0f, 1.0f));
+
+			//scale
+			_modelMatrix = glm::scale(_modelMatrix, _scale);
+
+			return _modelMatrix;
+		}
+
+		int AnimatedModel::GetClipsCount()
+		{
+			return _clipsCount;
+		}
+
+		std::vector<std::string> AnimatedModel::GetClipsNames()
+		{
+			return _clipNames;
+		}
+
+		int AnimatedModel::GetCurrentClip()
+		{
+			return _currentClip;
+		}
+
+		void AnimatedModel::SetCurrentClip(int clip)
+		{
+			_currentClip = clip;
+			_crossController.Play(&_clips[_currentClip]);
+		}
+
+		void AnimatedModel::SetCurrentClip(std::string clip)
+		{
+            for (int i = 0;i < _clipsCount;i++)
+            {
+                if (_clipNames[i] == clip)
+                {
+					_currentClip = i;
+
+					_crossController.Play(&_clips[_currentClip]);
+					return;
+                }
+            }
+		}
+
+		void AnimatedModel::FadeToClip(int clip, float time)
+		{
+			_currentClip = clip;
+			_crossController.FadeTo(&_clips[_currentClip], time);
+		}
+
+		void AnimatedModel::FadeToClip(std::string clip, float time)
+		{
+			for (int i = 0; i < _clipsCount; i++)
+			{
+				if (_clipNames[i] == clip)
+				{
+					_currentClip = i;
+
+					_crossController.FadeTo(&_clips[_currentClip],time);
+					return;
+				}
+			}
+		}
+
 		void AnimatedModel::Update(float dt)
 		{
-			if (mSkinType == SkinningType::CPU)
+			_crossController.Update(dt);
+
+			if (_skinningType == SkinningType::CPU)
 			{
-				mPlaybackTime = mClips[mCurrentClip].Sample(mCurrentPose, mPlaybackTime + dt);
+				//_playbackTime = _clips[_currentClip].Sample(_currentPose, _playbackTime + dt);
 
 				for (unsigned int i = 0, size = (unsigned int)_meshes.size(); i < size; ++i)
 				{
-					_meshes[i].CPUSkin(mSkeleton, mCurrentPose);
+					_meshes[i].CPUSkin(_skeleton, _crossController.GetCurrentPose());
 				}
 			}
 
-			if (mSkinType == SkinningType::CPUGPU)
+			if (_skinningType == SkinningType::CPUGPU)
 			{
-				mPlaybackTime = mClips[mCurrentClip].Sample(mCurrentPose, mPlaybackTime + dt);
-				mCurrentPose.GetMatrixPalette(mPosePalette);
+				//_playbackTime = _clips[_currentClip].Sample(_currentPose, _playbackTime + dt);
+				_crossController.GetCurrentPose().GetMatrixPalette(_posePalette);
 
-				std::vector<AnimMat4>& invBindPose = mSkeleton.GetInvBindPose();
-				for (unsigned int i = 0, size = (unsigned int)mPosePalette.size(); i < size; ++i) {
-					mPosePalette[i] = mPosePalette[i] * invBindPose[i];
+				std::vector<AnimMat4>& invBindPose = _skeleton.GetInvBindPose();
+				for (unsigned int i = 0, size = (unsigned int)_posePalette.size(); i < size; ++i) {
+					_posePalette[i] = _posePalette[i] * invBindPose[i];
 				}
 			}
 
-
-			if (mSkinType == SkinningType::GPU)
+			if (_skinningType == SkinningType::GPU)
 			{
-				mPlaybackTime = mClips[mCurrentClip].Sample(mCurrentPose, mPlaybackTime + dt);
-				mCurrentPose.GetMatrixPalette(mPosePalette);
+				//_playbackTime = _clips[_currentClip].Sample(_currentPose, _playbackTime + dt);
+				_crossController.GetCurrentPose().GetMatrixPalette(_posePalette);
 			}
 		}
 
 		void AnimatedModel::Draw()
 		{
+			if (_skinningType == SkinningType::GPU)
+			{
+				_shader->Set(VertexShader, "pose", _posePalette);
+				_shader->Set(VertexShader, "invBindPose", _skeleton.GetInvBindPose());
+			}
+
+			if (_skinningType == SkinningType::CPUGPU)
+			{
+				_shader->Set(VertexShader, "pose", _posePalette);
+			}
+
 			for (unsigned int i = 0, size = _meshes.size(); i < size; ++i)
 			{
 				glm::vec3 myColor = _meshes[i].GetMaterial()->GetColor(MaterialColorDiffuse);

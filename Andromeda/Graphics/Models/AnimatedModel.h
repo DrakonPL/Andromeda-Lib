@@ -11,6 +11,8 @@
 
 #include <vector>
 
+#include "Andromeda/Graphics/Animation/CrossFadeController.h"
+
 namespace Andromeda
 {
 	namespace Graphics
@@ -20,26 +22,46 @@ namespace Andromeda
 		private:
 			std::vector<AnimatedMesh> _meshes;
 
-			Skeleton mSkeleton;
-			Pose mCurrentPose;
+			Skeleton _skeleton;
+			Pose _currentPose;
 
-			std::vector<Clip> mClips;
-			std::vector<AnimMat4> mPosePalette;
+			std::vector<Clip> _clips;
+			std::vector<std::string> _clipNames;
+			int _clipsCount;
 
-			SkinningType mSkinType;
+			std::vector<AnimMat4> _posePalette;
 
-			unsigned int mCurrentClip;
-			float mPlaybackTime;
+			SkinningType _skinningType;
+
+			unsigned int _currentClip;
+			float _playbackTime;
+
+		private:
+
+			//blending and cross controller
+			CrossFadeController _crossController;
 
 		private:
 
 			Shader* _shader;
+
+			//transformation
+			glm::mat4 _modelMatrix;
+
+			glm::vec3 _position;
+			glm::vec3 _rotation;
+			glm::vec3 _scale;
+
+		private:
+
+
 
 		public:
 
 			AnimatedModel();
 			~AnimatedModel();
 
+			//load models
 			void LoadAnimatedModel(std::string modelFile);
 			void LoadStaticModel(std::string modelFile);
 			void LoadAllModels(std::string modelFile);
@@ -47,7 +69,32 @@ namespace Andromeda
 			void SetSkinningType(SkinningType skinning);
 
 			void SetShader(Shader* shader);
+			Shader* GetShader();
 
+			//transformations
+			void SetPosition(glm::vec3 position);
+			void SetRotation(glm::vec3 rotation);
+			void SetScale(glm::vec3 scale);
+
+			glm::vec3 GetPosition();
+			glm::vec3 GetRotation();
+			glm::vec3 GetScale();
+
+			glm::mat4 GetModelMatrix();
+
+			//clips
+			int GetClipsCount();
+			std::vector<std::string> GetClipsNames();
+
+			int GetCurrentClip();
+			void SetCurrentClip(int clip);
+			void SetCurrentClip(std::string clip);
+
+
+			void FadeToClip(int clip, float time);
+			void FadeToClip(std::string clip, float time);
+
+			//update and draw 
 			void Update(float dt);
 
 			void Draw();

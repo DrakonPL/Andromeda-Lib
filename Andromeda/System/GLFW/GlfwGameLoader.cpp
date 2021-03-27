@@ -65,9 +65,13 @@ namespace Andromeda
 				return;
 			}
 
+
 			//create rendering context
 			glfwMakeContextCurrent(_window);
 			glfwSwapInterval(1);
+
+			glfwSetInputMode(_window, GLFW_STICKY_KEYS, GLFW_TRUE);
+
 
 			//set input manager
 			Input::InputManager* intputManager = Input::InputManager::Instance();

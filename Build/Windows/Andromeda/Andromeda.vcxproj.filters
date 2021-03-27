@@ -70,6 +70,9 @@
     <Filter Include="Andromeda\Graphics\Animation">
       <UniqueIdentifier>{ed5355e7-77a3-4b04-9848-a827d5da7dec}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Andromeda\Math">
+      <UniqueIdentifier>{5b397482-2a60-449b-b33a-6a0b447e5531}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Andromeda\System\GameManager.cpp">
@@ -353,6 +356,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Andromeda\Graphics\Models\AnimatedModel.cpp">
       <Filter>Andromeda\Graphics\Models</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Andromeda\Math\Math.cpp">
+      <Filter>Andromeda\Math</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -700,6 +706,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Andromeda\Graphics\Models\AnimatedModel.h">
       <Filter>Andromeda\Graphics\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Andromeda\Math\Math.h">
+      <Filter>Andromeda\Math</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

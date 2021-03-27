@@ -155,6 +155,7 @@
     <ClCompile Include="..\..\..\Andromeda\Input\GLFW\KeyboardDeviceGlfw.cpp" />
     <ClCompile Include="..\..\..\Andromeda\Input\GLFW\MouseDeviceGlfw.cpp" />
     <ClCompile Include="..\..\..\Andromeda\Input\InputManager.cpp" />
+    <ClCompile Include="..\..\..\Andromeda\Math\Math.cpp" />
     <ClCompile Include="..\..\..\Andromeda\Network\NetworkManager.cpp" />
     <ClCompile Include="..\..\..\Andromeda\Network\Packet.cpp" />
     <ClCompile Include="..\..\..\Andromeda\Network\TcpSocket.cpp" />
@@ -268,6 +269,7 @@
     <ClInclude Include="..\..\..\Andromeda\Input\KeyboardDevice.h" />
     <ClInclude Include="..\..\..\Andromeda\Input\MouseDevice.h" />
     <ClInclude Include="..\..\..\Andromeda\Input\TouchDevice.h" />
+    <ClInclude Include="..\..\..\Andromeda\Math\Math.h" />
     <ClInclude Include="..\..\..\Andromeda\Network\NetworkManager.h" />
     <ClInclude Include="..\..\..\Andromeda\Network\Packet.h" />
     <ClInclude Include="..\..\..\Andromeda\Network\TcpSocket.h" />
