@@ -12,6 +12,7 @@
 #include <vector>
 
 #include "Andromeda/Graphics/Animation/CrossFadeController.h"
+#include "Andromeda/Graphics/Animation/RearrangeBones.h"
 
 namespace Andromeda
 {
@@ -25,11 +26,14 @@ namespace Andromeda
 			Skeleton _skeleton;
 			Pose _currentPose;
 
+			BoneMap boneMap;
+
 			std::vector<Clip> _clips;
 			std::vector<std::string> _clipNames;
 			int _clipsCount;
 
 			std::vector<AnimMat4> _posePalette;
+			std::vector<AnimMat4> _invBindPose;
 
 			SkinningType _skinningType;
 
@@ -54,6 +58,7 @@ namespace Andromeda
 
 		private:
 
+			int _connectedBone;
 
 
 		public:
@@ -64,7 +69,7 @@ namespace Andromeda
 			//load models
 			void LoadAnimatedModel(std::string modelFile);
 			void LoadStaticModel(std::string modelFile);
-			void LoadAllModels(std::string modelFile);
+			void LoadStaticModelAndConnectBone(std::string modelFile,int bone,glm::vec3 pos,glm::vec3 rot);
 
 			void SetSkinningType(SkinningType skinning);
 
@@ -82,6 +87,14 @@ namespace Andromeda
 
 			glm::mat4 GetModelMatrix();
 
+			std::vector<AnimMat4> GetPosePalette();
+			void SetPosePalette(std::vector<AnimMat4> posePalette);
+
+			std::vector<AnimMat4> GetInvBindPose();
+			void SetInvBindPose(std::vector<AnimMat4> invBindPose);
+
+			int GetBoneIndex(std::string boneName);
+
 			//clips
 			int GetClipsCount();
 			std::vector<std::string> GetClipsNames();
@@ -90,13 +103,16 @@ namespace Andromeda
 			void SetCurrentClip(int clip);
 			void SetCurrentClip(std::string clip);
 
+			float GetClipDuration(std::string clip);
+
+			void PlayOnce(int clip);
+			void PlayOnce(std::string clip);
 
 			void FadeToClip(int clip, float time);
 			void FadeToClip(std::string clip, float time);
 
 			//update and draw 
 			void Update(float dt);
-
 			void Draw();
 		};
 	}

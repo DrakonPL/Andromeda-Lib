@@ -29,7 +29,6 @@ namespace Andromeda
 			ModelMaterial* material_ = nullptr;
 
 			SkinningType mSkinType_;
-			bool _colorMesh;
 
 		protected:
 			std::vector<glm::vec3> position_;
@@ -64,7 +63,8 @@ namespace Andromeda
 
 			void UpdateSkinning();
 
-			void CreateMesh(SkinningType mSkinType,bool colorMesh = false);
+			void CreateMesh(SkinningType mSkinType);
+			void AttachMesh(SkinningType mSkinType,int boneNumber, glm::vec3 pos, glm::vec3 rot);
 			void Draw();
 
 

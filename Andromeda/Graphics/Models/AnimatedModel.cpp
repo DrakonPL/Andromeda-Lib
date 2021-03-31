@@ -11,6 +11,7 @@ namespace Andromeda
 		AnimatedModel::AnimatedModel()
 		{
 			_skinningType = SkinningType::None;
+			_connectedBone = -1;
 		}
 
 		AnimatedModel::~AnimatedModel()
@@ -31,12 +32,12 @@ namespace Andromeda
 				_clips = LoadAnimationClips(gltf);
 				FreeGLTFFile(gltf);
 
-				BoneMap bones = RearrangeSkeleton(_skeleton);
+				boneMap = RearrangeSkeleton(_skeleton);
 				for (unsigned int i = 0, size = (unsigned int)_meshes.size(); i < size; ++i) {
-					RearrangeMesh(_meshes[i], bones);
+					RearrangeMesh(_meshes[i], boneMap);
 				}
 				for (unsigned int i = 0, size = (unsigned int)_clips.size(); i < size; ++i) {
-					RearrangeClip(_clips[i], bones);
+					RearrangeClip(_clips[i], boneMap);
 				}
 
 				//update meshes
@@ -79,9 +80,25 @@ namespace Andromeda
 			}
 		}
 
-		void AnimatedModel::LoadAllModels(std::string modelFile)
+		void AnimatedModel::LoadStaticModelAndConnectBone(std::string modelFile,int bone,glm::vec3 pos, glm::vec3 rot)
 		{
 			std::string file = Andromeda::FileSystem::FileManager::Instance()->GetMainDirPath() + modelFile;
+
+			cgltf_data* gltf = LoadGLTFFile(file.c_str());
+
+			if (gltf)
+			{
+				_meshes = LoadStaticMeshes(gltf);
+				FreeGLTFFile(gltf);
+
+				_connectedBone = bone;
+
+				//update meshes
+				for (unsigned int i = 0, size = (unsigned int)_meshes.size(); i < size; ++i)
+				{
+					_meshes[i].AttachMesh(SkinningType::None, bone, pos, rot);
+				}
+			}
 		}
 
 		void AnimatedModel::SetSkinningType(SkinningType skinning)
@@ -148,6 +165,32 @@ namespace Andromeda
 			return _modelMatrix;
 		}
 
+		std::vector<AnimMat4> AnimatedModel::GetPosePalette()
+		{
+			return _posePalette;
+		}
+
+		void AnimatedModel::SetPosePalette(std::vector<AnimMat4> posePalette)
+		{
+			_posePalette = posePalette;
+		}
+
+
+		std::vector<AnimMat4> AnimatedModel::GetInvBindPose()
+		{
+			return _skeleton.GetInvBindPose();
+		}
+
+		void AnimatedModel::SetInvBindPose(std::vector<AnimMat4> invBindPose)
+		{
+			_invBindPose = invBindPose;
+		}
+
+		int AnimatedModel::GetBoneIndex(std::string boneName)
+		{
+			return _skeleton.GetJointNumber(boneName);
+		}
+
 		int AnimatedModel::GetClipsCount()
 		{
 			return _clipsCount;
@@ -181,6 +224,40 @@ namespace Andromeda
 					return;
                 }
             }
+		}
+
+		float AnimatedModel::GetClipDuration(std::string clip)
+		{
+			for (int i = 0; i < _clipsCount; i++)
+			{
+				if (_clipNames[i] == clip)
+				{
+					return _clips[i].GetDuration();
+				}
+			}
+
+			return 0.0f;
+		}
+
+		void AnimatedModel::PlayOnce(int clip)
+		{
+			_currentClip = clip;
+			_clips[_currentClip].SetLooping(false);
+			_crossController.Play(&_clips[_currentClip]);
+		}
+
+		void AnimatedModel::PlayOnce(std::string clip)
+		{
+			for (int i = 0; i < _clipsCount; i++)
+			{
+				if (_clipNames[i] == clip)
+				{
+					_currentClip = i;
+					_clips[_currentClip].SetLooping(false);
+					_crossController.Play(&_clips[_currentClip]);
+					return;
+				}
+			}
 		}
 
 		void AnimatedModel::FadeToClip(int clip, float time)
@@ -237,6 +314,12 @@ namespace Andromeda
 
 		void AnimatedModel::Draw()
 		{
+			if(_connectedBone != -1)
+			{
+				_shader->Set(VertexShader, "pose", _posePalette);
+				_shader->Set(VertexShader, "invBindPose", _invBindPose);
+			}
+
 			if (_skinningType == SkinningType::GPU)
 			{
 				_shader->Set(VertexShader, "pose", _posePalette);

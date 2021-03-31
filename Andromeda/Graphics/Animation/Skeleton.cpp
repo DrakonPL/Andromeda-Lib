@@ -54,6 +54,19 @@ std::vector<std::string>& Skeleton::GetJointNames() {
 	return mJointNames;
 }
 
+int Skeleton::GetJointNumber(std::string jointName)
+{
+    for (unsigned int i = 0;i < mJointNames.size();i++)
+    {
+        if (mJointNames[i] == jointName)
+        {
+			return i;
+        }
+    }
+
+	return -1;
+}
+
 std::string& Skeleton::GetJointName(unsigned int index) {
 	return mJointNames[index];
 }
