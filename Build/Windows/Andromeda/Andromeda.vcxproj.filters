@@ -273,15 +273,6 @@
     <ClCompile Include="..\..\..\Andromeda\Utils\SimpleProfiler.cpp">
       <Filter>Andromeda\Utils</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Andromeda\Graphics\Models\ModelMd5.cpp">
-      <Filter>Andromeda\Graphics\Models</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Andromeda\Graphics\Models\ModelMd5Animation.cpp">
-      <Filter>Andromeda\Graphics\Models</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Andromeda\Graphics\Models\ModelMd5Utils.cpp">
-      <Filter>Andromeda\Graphics\Models</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Andromeda\Audio\Sdl\SdlAudioManager.cpp">
       <Filter>Andromeda\Audio\Sdl</Filter>
     </ClCompile>
@@ -601,15 +592,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Andromeda\Utils\SimpleProfiler.h">
       <Filter>Andromeda\Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Andromeda\Graphics\Models\ModelMd5.h">
-      <Filter>Andromeda\Graphics\Models</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Andromeda\Graphics\Models\ModelMd5Animation.h">
-      <Filter>Andromeda\Graphics\Models</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Andromeda\Graphics\Models\ModelMd5Utils.h">
-      <Filter>Andromeda\Graphics\Models</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Andromeda\Audio\Sdl\SdlAudioManager.h">
       <Filter>Andromeda\Audio\Sdl</Filter>

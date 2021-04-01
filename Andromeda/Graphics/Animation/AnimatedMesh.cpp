@@ -27,7 +27,17 @@ namespace Andromeda
 			}*/
 		}
 
-		std::vector<glm::vec3>& AnimatedMesh::GetPositions()
+        void AnimatedMesh::Clean()
+        {
+			position_.clear();
+			normals_.clear();
+			textCoords_.clear();
+			weights_.clear();
+			joints_.clear();
+			indices_.clear();
+        }
+
+        std::vector<glm::vec3>& AnimatedMesh::GetPositions()
 		{
 			return position_;
 		}
@@ -125,9 +135,10 @@ namespace Andromeda
 			}
 
 			//generate buffer object
-            if (mSkinType_ == SkinningType::None)
+            if (mSkinType_ != SkinningType::CPU)
             {
 				mesh_->Generate();
+				Clean();
             }else
             {
 				mesh_->Generate(false);
@@ -225,9 +236,10 @@ namespace Andromeda
 			}
 
 			//generate buffer object
-			if (mSkinType_ == SkinningType::None && boneNumber == -1)
+			if (mSkinType_ != SkinningType::CPU)
 			{
 				mesh_->Generate();
+				Clean();
 			}
 			else
 			{

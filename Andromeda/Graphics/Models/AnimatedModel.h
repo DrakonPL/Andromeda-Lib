@@ -60,6 +60,10 @@ namespace Andromeda
 
 			int _connectedBone;
 
+		private:
+
+			std::vector<AnimatedModel*> _attachedModels;
+
 
 		public:
 
@@ -67,11 +71,14 @@ namespace Andromeda
 			~AnimatedModel();
 
 			//load models
-			void LoadAnimatedModel(std::string modelFile);
+			void LoadSkinnedModel(std::string modelFile, SkinningType skinning);
 			void LoadStaticModel(std::string modelFile);
+
+			void LoadOnly(std::string modelFile);
+
 			void LoadStaticModelAndConnectBone(std::string modelFile,int bone,glm::vec3 pos,glm::vec3 rot);
 
-			void SetSkinningType(SkinningType skinning);
+			void AttachModel(AnimatedModel* model, std::string boneName, glm::vec3 pos, glm::vec3 rot);
 
 			void SetShader(Shader* shader);
 			Shader* GetShader();
@@ -114,7 +121,9 @@ namespace Andromeda
 			//update and draw 
 			void Update(float dt);
 			void Draw();
-		};
+
+
+        };
 	}
 }
 

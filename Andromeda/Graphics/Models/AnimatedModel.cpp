@@ -8,25 +8,27 @@ namespace Andromeda
 {
 	namespace Graphics
 	{
-		AnimatedModel::AnimatedModel()
-		{
-			_skinningType = SkinningType::None;
-			_connectedBone = -1;
-		}
+		AnimatedModel::AnimatedModel(): _clipsCount(0), _currentClip(0), _playbackTime(0), _shader(nullptr)
+        {
+            _skinningType = SkinningType::None;
+            _connectedBone = -1;
+        }
 
-		AnimatedModel::~AnimatedModel()
+        AnimatedModel::~AnimatedModel()
 		{
 			_meshes.clear();
 			_clips.clear();
 		}		
 
-		void AnimatedModel::LoadAnimatedModel(std::string modelFile)
+		void AnimatedModel::LoadSkinnedModel(std::string modelFile, SkinningType skinning)
 		{
 			std::string file = Andromeda::FileSystem::FileManager::Instance()->GetMainDirPath() + modelFile;
 			cgltf_data* gltf = LoadGLTFFile(file.c_str());
 
 			if (gltf)
 			{
+				_skinningType = skinning;
+
 				_meshes = LoadAnimationMeshes(gltf);
 				_skeleton = LoadSkeleton(gltf);
 				_clips = LoadAnimationClips(gltf);
@@ -80,7 +82,19 @@ namespace Andromeda
 			}
 		}
 
-		void AnimatedModel::LoadStaticModelAndConnectBone(std::string modelFile,int bone,glm::vec3 pos, glm::vec3 rot)
+        void AnimatedModel::LoadOnly(std::string modelFile)
+        {
+			std::string file = Andromeda::FileSystem::FileManager::Instance()->GetMainDirPath() + modelFile;
+			cgltf_data* gltf = LoadGLTFFile(file.c_str());
+
+			if (gltf)
+			{
+				_meshes = LoadStaticMeshes(gltf);
+				FreeGLTFFile(gltf);
+			}
+        }
+
+        void AnimatedModel::LoadStaticModelAndConnectBone(std::string modelFile,int bone,glm::vec3 pos, glm::vec3 rot)
 		{
 			std::string file = Andromeda::FileSystem::FileManager::Instance()->GetMainDirPath() + modelFile;
 
@@ -101,12 +115,11 @@ namespace Andromeda
 			}
 		}
 
-		void AnimatedModel::SetSkinningType(SkinningType skinning)
-		{
-			_skinningType = skinning;
-		}
+        void AnimatedModel::AttachModel(AnimatedModel* model, std::string boneName, glm::vec3 pos, glm::vec3 rot)
+        {
+        }
 
-		void AnimatedModel::SetShader(Shader* shader)
+        void AnimatedModel::SetShader(Shader* shader)
 		{
 			_shader = shader;
 		}

@@ -135,9 +135,6 @@
     <ClCompile Include="..\..\..\Andromeda\Graphics\GL\VertexBufferObjectGL3.cpp" />
     <ClCompile Include="..\..\..\Andromeda\Graphics\Models\AnimatedModel.cpp" />
     <ClCompile Include="..\..\..\Andromeda\Graphics\Models\ModelMaterial.cpp" />
-    <ClCompile Include="..\..\..\Andromeda\Graphics\Models\ModelMd5.cpp" />
-    <ClCompile Include="..\..\..\Andromeda\Graphics\Models\ModelMd5Animation.cpp" />
-    <ClCompile Include="..\..\..\Andromeda\Graphics\Models\ModelMd5Utils.cpp" />
     <ClCompile Include="..\..\..\Andromeda\Graphics\Models\ModelObj.cpp" />
     <ClCompile Include="..\..\..\Andromeda\Graphics\Texture.cpp" />
     <ClCompile Include="..\..\..\Andromeda\Graphics\RenderManager.cpp" />
@@ -240,9 +237,6 @@
     <ClInclude Include="..\..\..\Andromeda\Graphics\GraphicsEnums.h" />
     <ClInclude Include="..\..\..\Andromeda\Graphics\Models\AnimatedModel.h" />
     <ClInclude Include="..\..\..\Andromeda\Graphics\Models\ModelMaterial.h" />
-    <ClInclude Include="..\..\..\Andromeda\Graphics\Models\ModelMd5.h" />
-    <ClInclude Include="..\..\..\Andromeda\Graphics\Models\ModelMd5Animation.h" />
-    <ClInclude Include="..\..\..\Andromeda\Graphics\Models\ModelMd5Utils.h" />
     <ClInclude Include="..\..\..\Andromeda\Graphics\Models\ModelMesh.h" />
     <ClInclude Include="..\..\..\Andromeda\Graphics\Models\ModelObj.h" />
     <ClInclude Include="..\..\..\Andromeda\Graphics\Texture.h" />

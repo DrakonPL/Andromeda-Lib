@@ -47,6 +47,7 @@ namespace Andromeda
 			AnimatedMesh();
 			~AnimatedMesh();
 
+			void Clean();
 
 			std::vector<glm::vec3>& GetPositions();
 			std::vector<glm::vec3>& GetNormals();
