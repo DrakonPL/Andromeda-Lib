@@ -54,7 +54,7 @@ std::vector<std::string>& Skeleton::GetJointNames() {
 	return mJointNames;
 }
 
-int Skeleton::GetJointNumber(std::string jointName)
+int Skeleton::GetJointNumber(std::string &jointName)
 {
     for (unsigned int i = 0;i < mJointNames.size();i++)
     {

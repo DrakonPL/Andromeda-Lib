@@ -94,30 +94,43 @@ namespace Andromeda
 			}
         }
 
-        void AnimatedModel::LoadStaticModelAndConnectBone(std::string modelFile,int bone,glm::vec3 pos, glm::vec3 rot)
-		{
-			std::string file = Andromeda::FileSystem::FileManager::Instance()->GetMainDirPath() + modelFile;
+  //      void AnimatedModel::LoadStaticModelAndConnectBone(std::string modelFile,int bone,glm::vec3 pos, glm::vec3 rot)
+		//{
+		//	std::string file = Andromeda::FileSystem::FileManager::Instance()->GetMainDirPath() + modelFile;
 
-			cgltf_data* gltf = LoadGLTFFile(file.c_str());
+		//	cgltf_data* gltf = LoadGLTFFile(file.c_str());
 
-			if (gltf)
-			{
-				_meshes = LoadStaticMeshes(gltf);
-				FreeGLTFFile(gltf);
+		//	if (gltf)
+		//	{
+		//		_meshes = LoadStaticMeshes(gltf);
+		//		FreeGLTFFile(gltf);
 
-				_connectedBone = bone;
+		//		_connectedBone = bone;
 
-				//update meshes
-				for (unsigned int i = 0, size = (unsigned int)_meshes.size(); i < size; ++i)
-				{
-					_meshes[i].AttachMesh(SkinningType::None, bone, pos, rot);
-				}
-			}
-		}
+		//		//update meshes
+		//		for (unsigned int i = 0, size = (unsigned int)_meshes.size(); i < size; ++i)
+		//		{
+		//			_meshes[i].AttachMesh(SkinningType::None, bone, pos, rot);
+		//		}
+		//	}
+		//}
 
         void AnimatedModel::AttachModel(AnimatedModel* model, std::string boneName, glm::vec3 pos, glm::vec3 rot)
         {
+			_attachedModels.push_back(model);
+			model->AttachMeshes(_skeleton.GetJointNumber(boneName), pos, rot);
         }
+
+		void AnimatedModel::AttachMeshes(int boneIndex, glm::vec3 pos, glm::vec3 rot)
+		{
+			_connectedBone = boneIndex;
+
+			//update meshes
+			for (unsigned int i = 0, size = _meshes.size(); i < size; ++i)
+			{
+				_meshes[i].AttachMesh(_skinningType, boneIndex, pos, rot);
+			}
+		}
 
         void AnimatedModel::SetShader(Shader* shader)
 		{
@@ -323,6 +336,15 @@ namespace Andromeda
 				//_playbackTime = _clips[_currentClip].Sample(_currentPose, _playbackTime + dt);
 				_crossController.GetCurrentPose().GetMatrixPalette(_posePalette);
 			}
+
+			//update skeleton matrices for attached models
+			for (unsigned int i = 0, size = _attachedModels.size(); i < size; ++i)
+			{
+				//get palette matrix
+				_attachedModels[i]->SetPosePalette(_posePalette);
+				_attachedModels[i]->SetInvBindPose(_skeleton.GetInvBindPose());
+			}
+
 		}
 
 		void AnimatedModel::Draw()

@@ -27,7 +27,7 @@ public:
 	void GetInvBindPose(std::vector<DualQuaternion>& outInvBndPose);
 
 	std::vector<std::string>& GetJointNames();
-	int GetJointNumber(std::string jointName);
+	int GetJointNumber(std::string &jointName);
 	std::string& GetJointName(unsigned int index);
 };
 

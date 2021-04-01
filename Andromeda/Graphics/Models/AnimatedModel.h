@@ -64,6 +64,9 @@ namespace Andromeda
 
 			std::vector<AnimatedModel*> _attachedModels;
 
+		private:
+
+			void AttachMeshes(int boneIndex, glm::vec3 pos, glm::vec3 rot);
 
 		public:
 
@@ -75,9 +78,6 @@ namespace Andromeda
 			void LoadStaticModel(std::string modelFile);
 
 			void LoadOnly(std::string modelFile);
-
-			void LoadStaticModelAndConnectBone(std::string modelFile,int bone,glm::vec3 pos,glm::vec3 rot);
-
 			void AttachModel(AnimatedModel* model, std::string boneName, glm::vec3 pos, glm::vec3 rot);
 
 			void SetShader(Shader* shader);

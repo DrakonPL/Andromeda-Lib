@@ -155,10 +155,7 @@ namespace Andromeda
 
 			mSkinType_ = mSkinType;
 
-			if (mSkinType_ == SkinningType::GPU || boneNumber != -1)
-				mesh_ = RenderManager::Instance()->CreateVertexArrayObject(NormalTextureWeighJoint, DynamicDraw);
-			else
-				mesh_ = RenderManager::Instance()->CreateVertexArrayObject(TextureNormal, DynamicDraw);
+			mesh_ = RenderManager::Instance()->CreateVertexArrayObject(NormalTextureWeighJoint, DynamicDraw);
 
 			//create vertices
 			mesh_->CreateVertices(position_.size());
@@ -169,57 +166,19 @@ namespace Andromeda
 			rotationMat = glm::rotate(rotationMat, rot.z, glm::vec3(0.0, 0.0, 1.0));
 
 			//get vertices
-			if (mSkinType_ == SkinningType::GPU)
+			NormalTextureWeighJointVertex* _simpleData = static_cast<NormalTextureWeighJointVertex*>(mesh_->GetVertices());
+
+			for (size_t v = 0; v < position_.size(); v++)
 			{
-				NormalTextureWeighJointVertex* _simpleData = static_cast<NormalTextureWeighJointVertex*>(mesh_->GetVertices());
+				_simpleData[v].Position = glm::vec3(rotationMat * glm::vec4(position_[v] + pos, 1.0));
+				_simpleData[v].Normal = normals_[v];
+				_simpleData[v].TexCoords = textCoords_[v];
+				_simpleData[v].Weights = glm::vec4(1.0f, 0, 0, 0);
 
-				for (size_t v = 0; v < position_.size(); v++)
-				{
-					_simpleData[v].Position = position_[v];
-					_simpleData[v].Normal = normals_[v];
-					_simpleData[v].TexCoords = textCoords_[v];
-					_simpleData[v].Weights = weights_[v];
-
-					_simpleData[v].wx = joints_[v].x;
-					_simpleData[v].wy = joints_[v].y;
-					_simpleData[v].wz = joints_[v].z;
-					_simpleData[v].ww = joints_[v].w;
-				}
-			}
-			else if (boneNumber != -1)
-			{
-				NormalTextureWeighJointVertex* _simpleData = static_cast<NormalTextureWeighJointVertex*>(mesh_->GetVertices());
-
-				for (size_t v = 0; v < position_.size(); v++)
-				{
-					_simpleData[v].Position =glm::vec3(rotationMat * glm::vec4(position_[v] + pos, 1.0));
-					_simpleData[v].Normal = normals_[v];
-					_simpleData[v].TexCoords = textCoords_[v];
-					_simpleData[v].Weights = glm::vec4(1.0f, 0, 0, 0);
-
-					_simpleData[v].wx = boneNumber;
-					_simpleData[v].wy = boneNumber;
-					_simpleData[v].wz = boneNumber;
-					_simpleData[v].ww = boneNumber;
-				}
-			}
-			else
-			{
-				TextureNormalVertex* _simpleData = static_cast<TextureNormalVertex*>(mesh_->GetVertices());
-
-				for (size_t v = 0; v < position_.size(); v++)
-				{
-					_simpleData[v].x = position_[v].x;
-					_simpleData[v].y = position_[v].y;
-					_simpleData[v].z = position_[v].z;
-
-					_simpleData[v].nx = normals_[v].x;
-					_simpleData[v].ny = normals_[v].y;
-					_simpleData[v].nz = normals_[v].z;
-
-					_simpleData[v].u = textCoords_[v].x;
-					_simpleData[v].v = textCoords_[v].y;
-				}
+				_simpleData[v].wx = boneNumber;
+				_simpleData[v].wy = boneNumber;
+				_simpleData[v].wz = boneNumber;
+				_simpleData[v].ww = boneNumber;
 			}
 
 
@@ -239,7 +198,6 @@ namespace Andromeda
 			if (mSkinType_ != SkinningType::CPU)
 			{
 				mesh_->Generate();
-				Clean();
 			}
 			else
 			{
