@@ -9,6 +9,10 @@ namespace Andromeda
 {
 	namespace Math
 	{
+		float Math::Deg2Rad = 3.141592 * 2.0F / 360.0F;
+
+		float Math::Rad2Deg = 1.0F / Deg2Rad;
+
 		float Math::Max(float a, float b) { return a > b ? a : b; }
 
 		float Math::Sign(float f) { return f >= 0.F ? 1.F : -1.F; }
@@ -24,7 +28,7 @@ namespace Andromeda
 
 		float  Math::Repeatf(float t, float length)
 		{
-			return Clamp(t - std::floorf(t / length) * length, 0.0f, length);
+			return Clamp(t - std::floor(t / length) * length, 0.0f, length);
 		}
 
 		float  Math::DeltaAngle(float current, float target)

@@ -11,6 +11,13 @@ namespace Andromeda
 		{
 		public:
 
+			static float Deg2Rad;// = 3.141592 * 2.0F / 360.0F;
+
+			// Radians-to-degrees conversion constant (RO).
+			static float Rad2Deg;// = 1.0F / Deg2Rad;
+
+		public:
+
 			static float Sign(float f);
 
             static float Max(float a, float b);

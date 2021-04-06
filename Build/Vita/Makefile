@@ -35,9 +35,7 @@ OBJS   = 	../../Andromeda/FileSystem/FileManager.o \
 			../../Andromeda/Graphics/Text/FontManager.o \
 			../../Andromeda/Graphics/Models/ModelObj.o \
 			../../Andromeda/Graphics/Models/ModelMaterial.o \
-			../../Andromeda/Graphics/Models/ModelMd5.o \
-			../../Andromeda/Graphics/Models/ModelMd5Animation.o \
-			../../Andromeda/Graphics/Models/ModelMd5Utils.o \
+			../../Andromeda/Graphics/Models/AnimatedModel.o \
 			../../Andromeda/Graphics/Animation\AnimatedMesh.o \
 			../../Andromeda/Graphics/Animation\AnimBaker.o \
 			../../Andromeda/Graphics/Animation\AnimMat4.o \
@@ -64,6 +62,7 @@ OBJS   = 	../../Andromeda/FileSystem/FileManager.o \
 			../../Andromeda/Input/Vita/InputManagerVita.o \
 			../../Andromeda/Input/Vita/GamepadDeviceVita.o \
 			../../Andromeda/Input/Vita/TouchDeviceVita.o \
+			../../Andromeda/Math/Math.o \
 			../../Andromeda/System/GameLoader.o \
 			../../Andromeda/System/GameManager.o \
 			../../Andromeda/System/GameState.o \
